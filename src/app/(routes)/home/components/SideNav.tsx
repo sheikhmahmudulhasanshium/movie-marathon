@@ -10,7 +10,6 @@ import Link from "next/link";
 
 const SideNav = () => {
     const [showMenu, setShowMenu] = useState(false);
-<<<<<<< HEAD
     const [showGenre, setShowGenre] = useState(false);
     const [showCountry, setShowCountry] = useState(false);
     
@@ -30,24 +29,10 @@ const SideNav = () => {
     //close country automatically if menu is closed
     if (!showMenu && showCountry) {
         setShowCountry(false);
-=======
-    const [showGenre,setShowGenre]= useState(false)
-    function toggleMenu() {
-        setShowMenu(!showMenu);
-
-    }
-    function toggleGenre() {
-        setShowGenre(!showGenre)
-    }
-    //close genre automatically if menu is closed
-    if(!showMenu&&showGenre){
-        setShowGenre(false)
->>>>>>> origin/main
     }
     return (
         <div className="flex justify-center items-center">
             {!showMenu && (
-<<<<<<< HEAD
                 <div className="px-12 hover:opacity-70" onClick={toggleMenu} >
                     <Image src={Menu} alt="menu" height={30} width={30} />
                 </div>
@@ -131,54 +116,6 @@ const SideNav = () => {
                             </div>
                         </div>
                     </div>
-=======
-                    <div className="px-12 hover:opacity-70" onClick={toggleMenu}>
-                        
-                        <Image src={Menu} alt="menu" height={30} width={30} />
-                    </div>
-            )}
-            {showMenu && (<>
-                <div className="px-28">&nbsp;</div>
-                <div className="flex flex-col bg-slate-400 fixed left-0 top-0   h-full justify-between items-center pl-10 ">
-                    
-
-                    <div className="flex pt-10 pr-2" onClick={toggleMenu}>
-                        <div className="flex justify-center items-center">Close
-                        <Image src={MenuClose} alt="close menu" height={30} width={30} />
-                        </div>
-                    </div>
-                    <div className="flex flex-col justify-between items-start space-y-4  gap-2 pl-4 pb-24 pr-2">
-                        <div className="w-full  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50"><Link href="/">Home</Link></div>
-                        
-                        <div className="w-full flex justify-between  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50">
-                            <div className="space-x-12 pr-4  justify-between items-center">Genre </div>
-                            {!showGenre && <div onClick={toggleGenre}><Image src={Plus} alt="+" width={25} height={25}/></div>}
-                            {showGenre && <div>
-                            
-                            <div className="grid grid-cols-2 gap-2 bg-slate-600 bg-opacity-15 rounded-xl">
-                                <div className="col-span-2 p-4 flex justify-center" onClick={toggleGenre}><Image src={Minus} alt="-" width={25} height={25}/></div>
-                                <div className="col-span-1 p-2">Horror</div>
-                                <div className="col-span-1 p-2">Action</div>
-                                <div className="col-span-1 p-2">Comedy</div>
-                                <div className="col-span-1 p-2">Drama</div>
-                                <div className="col-span-1 p-2">Science Fiction</div>
-                                <div className="col-span-1 p-2">Fantasy</div>
-                                <div className="col-span-1 p-2">Romance</div>
-                                <div className="col-span-1 p-2">Thriller</div>
-                                <div className="col-span-1 p-2">Adventure</div>
-                                <div className="col-span-1 p-2">Animation</div>
-                            </div></div>}
-                        </div>
-                        <div className="w-full  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50">Country</div>
-                        <div className="w-full  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50"><Link href="/movies">Movies</Link></div>
-                        <div className="w-full  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50"><Link href="/tv-shows">Tv Shows</Link></div>
-                        <div className="w-full  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50"><Link href="/top-imdb">Top IMDB</Link></div>
-            
-                        <Link href=""><div className="w-full  shadow-green-900 shadow-lg pr-8 pl-2   border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50">Download App</div></Link>
-                    </div>
-                    
-                </div>
->>>>>>> origin/main
                 </>
             )}
         </div>
