@@ -7,7 +7,7 @@ const FAQ = () => {
                     {/* FAQ Item 1 */}
                     <div>
                         <h3 className="text-xl font-semibold mb-2">How do I create an account?</h3>
-                        <p className="text-gray-700">To create an account, click on the "Sign Up" button and follow the instructions to complete the registration process.</p>
+                        <p className="text-gray-700">To create an account, click on the &quot;Sign Up&quot; button and follow the instructions to complete the registration process.</p>
                     </div>
                     {/* FAQ Item 2 */}
                     <div>

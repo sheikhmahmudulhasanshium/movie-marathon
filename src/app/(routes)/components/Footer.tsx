@@ -7,7 +7,7 @@ const Footer = () => {
             <Link href="/" >
                 <div className="flex justify-center items-center gap-10 pb-8">
                     <Image src={Logo} alt="Logo" width={100} height={100} className="w-4/12 h-4/12"/>
-                    <p className="w-4/12 text-justify pt-6">Movie Marathon is the ultimate app for movie enthusiasts who love to binge-watch their favorite films and TV shows. Whether you're planning a cozy night in or an epic weekend of non-stop entertainment, Movie Marathon helps you organize and enhance your viewing experience. With a vast library of movies and TV series across various genres, personalized recommendations, and seamless streaming options, you can easily discover new favorites and revisit classics.</p>
+                    <p className="w-4/12 text-justify pt-6">Movie Marathon is the ultimate app for movie enthusiasts who love to binge-watch their favorite films and TV shows. Whether you&apos;re planning a cozy night in or an epic weekend of non-stop entertainment, Movie Marathon helps you organize and enhance your viewing experience. With a vast library of movies and TV series across various genres, personalized recommendations, and seamless streaming options, you can easily discover new favorites and revisit classics.</p>
                 </div>
             </Link>
             
