@@ -12,9 +12,11 @@ const Footer = () => {
             </Link>
             
             <div className="flex justify-center items-center gap-4 pb-8">
-                <div className="hover:underline hover:opacity-85">Terms & Conditions</div>
-                <div className="hover:underline hover:opacity-85">Privacy Policy</div>
-                <div className="hover:underline hover:opacity-85">Contact</div>
+                <div className="hover:underline hover:opacity-85"><Link href="/terms-and-conditions">Terms & Conditions</Link></div>
+                <div className="hover:underline hover:opacity-85"><Link href="/privacy-policy">Privacy Policy</Link></div>
+                
+                <div className="hover:underline hover:opacity-85"><Link href="/contact">Contact</Link></div>
+                
             </div>
             <p className="text-sm">&copy; 2024 Movie Marathon. All rights reserved.</p>
         </footer>

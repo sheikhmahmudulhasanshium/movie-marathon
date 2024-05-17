@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {  Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Poppins({
+  subsets: ["latin"],
+  weight: "500"
+});
 
 export const metadata: Metadata = {
   title: "Movie Marathon",
@@ -19,7 +22,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/images/favicon.ico" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>{children}</body>
     </html>
   );
 }
