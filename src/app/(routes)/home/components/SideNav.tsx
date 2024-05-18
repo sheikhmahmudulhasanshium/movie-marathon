@@ -1,12 +1,12 @@
 "use client"
 import Image from "next/image";
-import Menu from "../../../../../public/images/menu.png";
 import MenuClose from "../../../../../public/images/close.png";
 import Plus from "../../../../../public/images/plus.png";
 import Minus from "../../../../../public/images/minus.png";
 
 import { useState } from "react";
 import Link from "next/link";
+import { BiMenu } from "react-icons/bi";
 
 const SideNav = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -31,23 +31,23 @@ const SideNav = () => {
         setShowCountry(false);
     }
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center ">
             {!showMenu && (
                 <div className="px-12 hover:opacity-70" onClick={toggleMenu} >
-                    <Image src={Menu} alt="menu" height={30} width={30} />
+                    <BiMenu className="text-6xl text-cyan-950 mt-4 hover:bg-opactity-70"/>
                 </div>
             )}
             {showMenu && (
                 <>
                     <div className="px-28">&nbsp;</div>
-                    <div className="flex flex-col bg-slate-200 fixed left-0 top-0 h-full justify-between items-center pl-10 pb-28">
+                    <div className="flex flex-col bg-slate-200 fixed left-0 top-0 h-fit rounded-2xl justify-between items-center pl-10 pb-8">
                         <div className="flex pt-10 pr-2" onClick={toggleMenu}>
                             <div className="flex justify-center items-center">Close
                                 <Image src={MenuClose} alt="close menu" height={30} width={30} />
                             </div>
                         </div>
-                        <div className="flex flex-col justify-between items-start space-y-4 gap-2 pl-4 pb-24 pr-2">
-                            <div className="w-full shadow-green-900 shadow-lg">
+                        <div className="flex flex-col justify-between items-start space-y-4 gap-2 pl-4 pb-24 pr-2 pt-36">
+                            <div className="w-full shadow-green-900 shadow-lg ">
                                 <Link href="/">
                                     <div className="pr-8 pl-2 border-b-4 border-b-emerald-900 hover:bg-slate-200 hover:border-opacity-50">Home</div>
                                 </Link>

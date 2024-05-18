@@ -5,12 +5,13 @@ import Content from "./Content";
 
 const Body = () => {
     return ( 
-        <div className="w-screen bg-slate-300 flex  justify-between items-center  flex-col">
-            <div className="w-screen justify-center items-center flex lg:px-60 md:px-16 sm:px-4"><SearchBar/></div>
-            
-            <About/>
-            <SocialHandle/>
-            <Content/>
+        <div className=" flex flex-1 flex-col  justify-center items-center">
+            <div className="max-w-screen-sm sm:w-full md:w-screen lg:w-screen ">
+                <SearchBar/>
+                <About/>
+                <SocialHandle/>
+                <Content/>
+            </div>
         </div>
      );
 }

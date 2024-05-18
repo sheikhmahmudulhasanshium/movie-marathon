@@ -1,6 +1,6 @@
 const FAQ = () => {
     return (
-        <div className="bg-gray-100 py-12 w-full rounded-2xl bg-opacity-40 m-12">
+        <div className="bg-gray-100 py-12 w-full rounded-2xl bg-opacity-40 m-12 ">
             <div className="max-w-4xl mx-auto px-4">
                 <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
                 <div className="space-y-6">

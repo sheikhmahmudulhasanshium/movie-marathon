@@ -7,7 +7,6 @@ export default function Home() {
     <main className="w-screen  min-h-max flex flex-col justify-between ">
       <Header/>
       <Body/>
-      <Footer/>
     </main>
   );
 }

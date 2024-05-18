@@ -5,9 +5,9 @@ import Body from "./components/Body";
 
 const Home = () => {
     return (
-            <div className="w-screen min-h-max flex flex-col justify-between items-center">
+            <div className="">
                 <Body/>
-                <Footer />
+                
             </div>
     );
 };

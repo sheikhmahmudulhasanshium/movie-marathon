@@ -14,7 +14,8 @@ const SearchBar = () => {
     };
 
     return (
-        <div className="w-full flex justify-between items-center bg-cyan-950 m-4 border-cyan-950 border rounded-lg hover:opacity-75">
+    <div className='px-12 w-full sm:w-screen md:w-full lg:w-full'>
+        <div className=" flex justify-between items-center bg-cyan-950 m-4 border-cyan-950 border rounded-lg hover:opacity-75 text-4xl">
             <input
                 className="w-11/12 py-4 pl-4 rounded-l-lg"
                 type="text"
@@ -22,7 +23,7 @@ const SearchBar = () => {
                 value={searchText}
                 onChange={handleInputChange}
             />
-            <div className="w-1/12 flex items-center justify-center">
+            <div className="w-1/12 flex items-center justify-center text-white">
                 {searchText.length > 0 && (
                     <FaTimes className="cursor-pointer" onClick={clearSearch} />
                 )}
@@ -31,6 +32,7 @@ const SearchBar = () => {
                 )}
             </div>
         </div>
+    </div>
     );
 }
 
