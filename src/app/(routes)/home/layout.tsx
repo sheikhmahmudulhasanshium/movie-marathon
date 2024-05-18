@@ -7,7 +7,7 @@ import SideNav from "./components/SideNav";
 export default function Layout({ children }:{children:React.ReactNode}) {
     return (
         <div className="flex flex-col justify-between   w-max sm:full md:w-screen lg:w-screen ">
-            <div className="flex">
+            <div className="flex ">
                 <SideNav />
                 <Header />
             </div>

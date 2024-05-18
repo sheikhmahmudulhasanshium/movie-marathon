@@ -6,7 +6,7 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 const ModeToggle = () => {
     const { theme, setTheme } = useTheme();
     const [isMounted, setIsMounted] = useState(false);
-    const [dark, setDark] = useState(true);
+    const [dark, setDark] = useState(false);
 
     useEffect(() => {
         setIsMounted(true);

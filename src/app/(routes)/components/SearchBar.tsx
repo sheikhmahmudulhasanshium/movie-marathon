@@ -14,7 +14,7 @@ const SearchBar = () => {
     };
 
     return (
-    <div className='px-12 w-full sm:w-screen md:w-full lg:w-full'>
+    <div className='px-12 w-full sm:w-screen md:w-full lg:w-full '>
         <div className=" flex justify-between items-center bg-cyan-950 m-4 border-cyan-950 border rounded-lg hover:opacity-75 text-4xl">
             <input
                 className="w-11/12 py-4 pl-4 rounded-l-lg"

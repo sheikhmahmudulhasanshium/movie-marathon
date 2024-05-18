@@ -37,7 +37,7 @@ const SideNav = () => {
             )}
             {showMenu && (
                 <div className="flex justify-center items-center h-full w-full px-48">
-                    <div className="fixed inset-0 bg-white dark:bg-cyan-950 flex flex-col justify-between items-center h-full w-64 p-4 rounded-br-2xl shadow-lg z-50">
+                    <div className="fixed inset-0 bg-white dark:bg-cyan-950  flex flex-col justify-between items-center h-full w-64 p-4 rounded-br-2xl shadow-lg z-50">
                         <div className="flex items-center justify-between w-full pb-8 ">
                             <div className="flex items-center gap-2 cursor-pointer" onClick={toggleMenu}>
                                 <BiLeftArrow className="text-red-700 text-4xl font-bold" />

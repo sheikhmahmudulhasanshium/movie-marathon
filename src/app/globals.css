@@ -9,3 +9,11 @@ body,
   height: 100%;
 }
 
+/* In your CSS or Tailwind setup */
+html {
+  @apply bg-white text-black;
+}
+
+html.dark {
+  @apply bg-gray-900 text-white;
+}
