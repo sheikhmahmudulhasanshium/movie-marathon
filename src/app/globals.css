@@ -1,13 +1,11 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html,
 body,
-:root{
-  height: 100%
-}
-.text-custom {
-  font-size: 0.625rem; /* Adjust the font size as needed */
+:root {
+  height: 100%;
 }
 

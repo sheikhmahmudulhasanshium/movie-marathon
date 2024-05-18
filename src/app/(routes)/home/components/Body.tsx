@@ -5,7 +5,7 @@ import Content from "./Content";
 
 const Body = () => {
     return ( 
-        <div className=" flex flex-1 flex-col  justify-center items-center">
+        <div className=" flex  flex-col  justify-center items-center">
             <div className="max-w-screen-sm sm:w-full md:w-screen lg:w-screen ">
                 <SearchBar/>
                 <About/>

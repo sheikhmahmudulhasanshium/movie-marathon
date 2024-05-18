@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import {  Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./(routes)/components/theme-provider";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -18,11 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/images/favicon.ico" className="rounded-sm"/>
       </head>
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

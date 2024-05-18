@@ -9,7 +9,7 @@ export default function Layout({ children }:{children:React.ReactNode}) {
         <div className="flex flex-col justify-between   w-max sm:full md:w-screen lg:w-screen ">
             <div className="flex">
                 <SideNav />
-                <Header /> 
+                <Header />
             </div>
             {children}
             <Footer/>
