@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="icon" href="/images/favicon.ico" className="rounded-sm"/>
       </head>
       <body className={font.className}>{children}</body>
     </html>

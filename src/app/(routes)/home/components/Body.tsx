@@ -5,8 +5,8 @@ import Content from "./Content";
 
 const Body = () => {
     return ( 
-        <div className="w-full bg-slate-300 flex  justify-between items-center  flex-col">
-            <div className="w-full justify-center items-center flex lg:px-60 md:px-6 sm:px-2"><SearchBar/></div>
+        <div className="w-screen bg-slate-300 flex  justify-between items-center  flex-col">
+            <div className="w-screen justify-center items-center flex lg:px-60 md:px-16 sm:px-4"><SearchBar/></div>
             
             <About/>
             <SocialHandle/>
