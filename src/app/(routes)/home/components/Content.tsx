@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import { Movie } from "../../../../../type";
 import GetData from "../../../../../actions/get-data";
+import { VscLoading } from "react-icons/vsc";
 
 const Content = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
@@ -19,7 +20,7 @@ const Content = () => {
     }, []);
 
     if (loading) {
-        return <div className="text-center py-12 flex text-slate-400">Please wait...</div>;
+        return <div className="text-center py-12 flex text-slate-400 justify-center items-center">Please wait... <VscLoading className="text-2xl animate-spin"/></div>;
     }
 
     return (

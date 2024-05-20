@@ -1,22 +1,22 @@
-"use client"
-import React from 'react';
-
 import Footer from "../components/Footer";
+import SearchBar from "../components/SearchBar";
 import Header from "../home/components/Header";
 import SideNav from "../home/components/SideNav";
 import Container from "./components/container";
 
 const Movies = () => {
-    return ( 
+    return (
         <div>
             <div className="flex justify-start">
-                <SideNav/>
-                <Header/>
+                <SideNav />
+                <Header />
+
             </div>
-            <Container/>
-            <Footer/>
-        </div> 
+            <SearchBar/>
+            <Container />
+            <Footer />
+        </div>
     );
-}
+};
 
 export default Movies;
