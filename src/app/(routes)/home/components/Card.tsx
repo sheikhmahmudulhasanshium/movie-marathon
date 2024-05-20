@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({ movie }) => {
 
     return ( 
         <div className="flex flex-col rounded-lg col-span-1 bg-slate-500 m-2 hover:opacity-85">
-            <Link href={`/movie/${movie.imdbID}`} >
+            <Link href={`/movies/${movie.imdbID}`} >
                 {<p className="border rounded-sm absolute ml-8 mt-4 font-bold text-yellow-500 bg-slate-50 bg-opacity-15">HD</p>}
                 <Image src={posterSrc} alt="Poster" height={400} width={300} className="rounded-t-xl" loading="lazy" />
                 <p className="text-xl text-center text-white mt-auto">{truncatedTitle}</p>
