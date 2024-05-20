@@ -24,7 +24,7 @@ const Content = () => {
 
     return (
         <div className="pb-12">
-            <div className="grid sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 grid-cols-2 w-full max-w-screen-lg">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-2 w-full max-w-screen-lg">
                 {movies.map((movie, index) => (
                     <Card key={index} movie={movie} />
                 ))}
