@@ -4,16 +4,16 @@ import { BiSolidVideo } from "react-icons/bi";
 
 const Body = () => {
     return (
-        <div className="relative flex flex-col  justify-center items-center w-full h-screen mt-12">
+        <div className="relative flex flex-col justify-center items-center w-full h-screen mt-12">
             {/* Background image with opacity */}
             <div
-                className="absolute inset-0 bg-cover bg-center opacity-75 justify-center items-center"
+                className="absolute inset-0 bg-cover bg-center opacity-75 justify-center items-center z-0"
                 style={{
                     backgroundImage: `url(${SamplePic.src})`
                 }}
             ></div>
             {/* Content on top of the background */}
-            <div className="relative flex   gap-4 space-x-2 p-4">
+            <div className="relative flex gap-4 space-x-2 p-4 z-10">
                 <div className="rounded-xl">
                     <Image src={SamplePic} alt="poster" height={200} width={200} className="rounded-xl" />
                 </div>
@@ -24,15 +24,15 @@ const Body = () => {
                             <p>Trailer</p>
                             <BiSolidVideo className="text-2xl" />
                         </div>
-                        {/** Quality */}
+                        {/* Quality */}
                         <div className="border border-white p-1 bg-cyan-950 bg-opacity-30 flex text-white m-1 rounded-md">HD</div>
-                        {/** IMDB Rating */}
+                        {/* IMDB Rating */}
                         <p className="text-orange-400 text-lg">IMDB: 9</p>
                     </div>
-                    {/** Description */}
+                    {/* Description */}
                     <div className="text-base text-white mt-3 space-y-4">
-                        {/** Plot */}
-                        <p className="text-justify">Here the plot will be explained. It might be long. But it will be summarized eventually. The average plot length should be calculated.</p>
+                        {/* Plot */}
+                        <p className="text-justify items-center w-6/12">Here the plot will be explained. It might be long. But it will be summarized eventually. The average plot length should be calculated.</p>
                         <div className="flex gap-2">
                             <p className="font-bold">Released:</p>
                             <p>20-May-2024</p>

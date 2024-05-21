@@ -8,15 +8,17 @@ import Suggestions from "./components/Suggestions";
 const Movie = () => {
     return ( 
         <>
-            <div className="flex justify-start">
+            <div className="flex flex-col justify-center items-center w-max sm:w-screen md:w-full lg:w-full">
                 {/*<SideNav />*/}
                 <Header />
             </div>
+            <div className="flex flex-col justify-center items-center w-max sm:w-screen md:w-full lg:w-full">    
                 <SearchBar/>
                 <Body/>
                 <SocialHandle/>
                 <Suggestions/>
                 <Footer />
+            </div>    
         </>
      );
 }
