@@ -32,7 +32,7 @@ const Content = () => {
 
     return (
         <div className="pb-12 ">
-            <p className="text-4xl font-thin font-serif text-cyan-950 py-12">Movies</p>
+            <p className="text-4xl font-thin font-serif text-cyan-950 dark:text-white py-12 ">Movies</p>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-2 w-full max-w-screen-lg">
                 {movies.slice(0, visibleMovies).map((movie, index) => (
                     <Card key={index} movie={movie} />
@@ -51,7 +51,7 @@ const Content = () => {
                 </Link>
             )}
 
-            <p className="text-4xl font-thin font-serif text-cyan-950 py-12">Tv Shows</p>
+            <p className="text-4xl font-thin font-serif text-cyan-950 py-12 dark:text-white">Tv Shows</p>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-cols-2 w-full max-w-screen-lg">
                 {series.slice(0, visibleSeries).map((show, index) => (
                     <Card key={index} movie={show} />

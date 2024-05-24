@@ -39,11 +39,12 @@ const SideNav = () => {
                 <div className="flex justify-center items-center h-full w-full px-48">
                     <div className="fixed inset-0 bg-white dark:bg-cyan-950  flex flex-col justify-between items-center h-full w-64 p-4 rounded-br-2xl shadow-lg z-50">
                         <div className="flex items-center justify-between w-full pb-8 ">
+                            <ModeToggle />
                             <div className="flex items-center gap-2 cursor-pointer" onClick={toggleMenu}>
                                 <BiLeftArrow className="text-red-700 text-4xl font-bold" />
                                 <span className="text-xl">Close</span>
                             </div>
-                            <ModeToggle />
+                            
                         </div>
                         <div className="flex flex-col space-y-4 w-full flex-grow overflow-y-auto ">
                             <Link href="/">

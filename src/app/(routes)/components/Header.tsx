@@ -8,7 +8,7 @@ import { BiSolidCameraMovie } from "react-icons/bi";
 
 const Header = () => {
     return ( 
-        <div className="flex items-center lg:px-16 md:px-10 sm:px-4 px-12 justify-between gap-8 w-max sm:w-full md:w-screen lg:w-screen">
+        <div className="flex items-center lg:px-16 md:px-10 sm:px-4 px-12 justify-between gap-8 w-max sm:w-full md:w-screen lg:w-screen ">
             <Link href="/">
                 <Image 
                     src={Logo} 
@@ -18,7 +18,7 @@ const Header = () => {
                     className=""
                 />
             </Link>
-            <div className="flex gap-4 text-6xl sm:text-6xl md:text-6xl lg:text-4xl lg:font-bold text-cyan-950">
+            <div className="flex gap-4 text-6xl sm:text-6xl md:text-6xl lg:text-4xl lg:font-bold text-cyan-950 dark:text-white ">
                 {/* Icons for small and medium screens */}
                 <Link href="/home" className="lg:hidden hover:text-emerald-950 hover:text-opacity-85">
                     <FaHome />
@@ -34,7 +34,7 @@ const Header = () => {
                 </Link>
                 
                 {/* Text for large screens */}
-                <Link href="/home" className="hidden lg:block hover:underline hover:text-emerald-950 hover:text-opacity-85 text-3xl">
+                <Link href="/home" className="hidden lg:block hover:underline hover:text-emerald-950 hover:text-opacity-85 text-3xl ">
                     Home
                 </Link>
                 <Link href="/movies" className="hidden lg:block hover:underline hover:text-emerald-950 hover:text-opacity-85 text-3xl">
