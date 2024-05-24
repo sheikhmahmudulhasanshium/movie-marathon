@@ -1,14 +1,14 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
-import SamplePoster from "../../../../../public/images/sample-poster.jpg";
-import { Movie } from "../../../../../type";
-
+import React from 'react';
+import { Movie } from "../../../../type";
+import SamplePoster from "../../../../public/images/sample-poster.jpg"
 interface CardProps {
     movie: Movie;
 }
 
 const Card: React.FC<CardProps> = ({ movie }) => {
-
     const posterSrc = movie.Poster !== "N/A" ? movie.Poster : SamplePoster;
     const truncatedTitle = movie.Title.length > 20 ? `${movie.Title.substring(0, 10)}...` : movie.Title;
 
@@ -26,5 +26,5 @@ const Card: React.FC<CardProps> = ({ movie }) => {
         </div>
     );
 }
- 
+
 export default Card;

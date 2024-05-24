@@ -18,6 +18,11 @@ const SearchBar = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
 
     useEffect(() => {
+        if (!searchText.trim()) {
+            setFilteredMovies([]);
+            return;
+        }
+
         setLoading(true);
         if (searchText.trim().length === 5 || searchText.includes(' ')) {
             // Search in the API if search key has a space or its length is 5 characters
@@ -48,7 +53,9 @@ const SearchBar = () => {
                         similarity: stringSimilarity.compareTwoStrings(searchText.toLowerCase(), movie.Title.toLowerCase())
                     }));
                     // Sort results by similarity score
-                    const sortedResults = resultsWithSimilarity.sort((a, b) => b.similarity - a.similarity);
+                    const sortedResults = resultsWithSimilarity
+                        .filter(movie => movie.similarity > 0.3) // Filter out results with low similarity
+                        .sort((a, b) => b.similarity - a.similarity);
                     setFilteredMovies(sortedResults);
                     setErrorMessage('');
                 } else {

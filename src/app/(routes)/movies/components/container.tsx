@@ -1,8 +1,8 @@
 "use client"
 import { FC } from "react";
-import Card from "./Card";
 import useMovies from "../../../../../actions/get-movies";
 import { VscLoading } from "react-icons/vsc";
+import Card from "../../components/Card";
 
 const Container: FC = () => {
     const movies = useMovies();

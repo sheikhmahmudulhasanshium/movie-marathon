@@ -23,7 +23,7 @@ const ModeToggle = () => {
     }
 
     return (
-        <div className="text-4xl mr-4">
+        <div className="text-5xl ">
             <button onClick={toggleMode}>
                 {dark ? <MdLightMode className="text-yellow-300"/> : <MdDarkMode className="text-slate-500"/>}
             </button>

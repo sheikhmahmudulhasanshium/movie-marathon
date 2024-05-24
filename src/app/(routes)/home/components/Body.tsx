@@ -10,7 +10,7 @@ const Body = () => {
                 <div className=" flex"><SearchBar/></div>
                 <About/>
                 <SocialHandle/>
-                <Content/>
+                
             </div>
         </div>
      );

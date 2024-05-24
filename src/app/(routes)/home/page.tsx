@@ -1,14 +1,24 @@
-// pages/index.js
-
+import Body from "../components/Body";
 import Footer from "../components/Footer";
-import Body from "./components/Body";
+import Header from "../components/Header";
+import SearchBar from "../components/SearchBar";
+import Content from "./components/Content";
+import SideNav from "./components/SideNav";
 
 const Home = () => {
     return (
-            <div className="">
-                <Body/>
-                
+        <div className="flex flex-col  justify-between  sm:w-max md:w-screen lg:w-full max-w-max w-max">
+            <div className="flex start">
+                <SideNav />
+                <Header />
             </div>
+            
+            <div className=" flex flex-col justify-center items-center ">
+                <SearchBar/>
+                <Content />
+                <Footer/>
+            </div>
+        </div>
     );
 };
 
