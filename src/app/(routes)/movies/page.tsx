@@ -6,15 +6,17 @@ import Container from "./components/container";
 
 const Movies = () => {
     return (
-        <div>
-            <div className="flex justify-start">
+        <div className="flex flex-col w-max sm:w-max md:w-screen lg:w-full ">
+            <div className="flex start">
                 <SideNav />
                 <Header />
-
             </div>
-            <SearchBar/>
-            <Container />
-            <Footer />
+            
+            <div className="flex flex-col justify-center items-center">
+                <SearchBar/>
+                <Container />
+                <Footer/>
+            </div>
         </div>
     );
 };

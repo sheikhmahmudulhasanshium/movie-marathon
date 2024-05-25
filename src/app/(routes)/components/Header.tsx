@@ -18,7 +18,7 @@ const Header = () => {
                     className=""
                 />
             </Link>
-            <div className="flex gap-4 text-6xl sm:text-6xl md:text-6xl lg:text-4xl lg:font-bold text-cyan-950 dark:text-white ">
+            <div className="flex gap-4 text-6xl sm:text-6xl md:text-6xl lg:text-4xl lg:font-bold text-cyan-950 dark:text-white gap-x-8 sm:gap-x-6 md:gap-x-7 lg:gap-x-8">
                 {/* Icons for small and medium screens */}
                 <Link href="/home" className="lg:hidden hover:text-emerald-950 hover:text-opacity-85">
                     <FaHome />

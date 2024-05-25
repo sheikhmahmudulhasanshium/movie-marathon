@@ -13,8 +13,8 @@ const Container: FC = () => {
     }
 
     return (
-        <div className="flex flex-1 flex-col justify-center items-center w-full  mt-14 pt-12">
-            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+        <div className=" flex flex-col justify-center items-center mt-12 pb-14">
+            <div className="grid grid-cols-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-4">
                 {movies.map((movie, index) => (
                     <Card key={index} movie={movie} />
                 ))}
