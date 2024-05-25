@@ -18,17 +18,8 @@ const Card: React.FC<CardProps> = ({ movie }) => {
                 href={{
                     pathname: `/movies/${movie.imdbID}`,
                     query: {
-                        title: movie.Title,
-                        poster: movie.Poster,
-                        year: movie.Year,
-                        type: movie.Type,
-                        imdbRating: movie.imdbRating,
-                        country: movie.Country,
-                        genre: movie.Genre,
-                        production: movie.Production,
-                        plot: movie.Plot,
-                        casts: movie.Actors,
-                    },
+                        id: movie.imdbID,
+                        },
                 }}
             >
                 <p className="border rounded-sm absolute ml-8 mt-4 font-bold text-yellow-500 bg-slate-50 bg-opacity-15">HD</p>

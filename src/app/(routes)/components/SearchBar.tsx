@@ -123,7 +123,7 @@ const SearchBar = () => {
                     <h2 className="text-xl font-bold mb-2">Search Results</h2>
                     <div className='flex flex-col'>
                         {filteredMovies.slice(0, displayCount).map(movie => (
-                            <Link href={`/movies/${movie.imdbID}`} key={movie.imdbID}>
+                            <Link href={{pathname: `/movies/${movie.imdbID}`,query: {id: movie.imdbID,},}} key={movie.imdbID}>
                                 <div className="mb-2 text-xl flex items-center space-x-2 text-blue-950">
                                     <div>
                                         <Image 
