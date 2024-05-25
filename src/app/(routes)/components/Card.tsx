@@ -22,12 +22,13 @@ const Card: React.FC<CardProps> = ({ movie }) => {
                         },
                 }}
             >
-                <p className="border rounded-sm absolute ml-8 mt-4 font-bold text-yellow-500 bg-slate-50 bg-opacity-15">HD</p>
+                <p className="border rounded-sm absolute ml-8 mt-4 font-bold text-yellow-500 bg-slate-50 bg-opacity-85">{movie.Rated}</p>
                 <Image src={posterSrc} alt="Poster" height={400} width={300} className="rounded-t-xl" loading="lazy" />
                 <p className="text-xl text-center text-white mt-auto">{truncatedTitle}</p>
             </Link>
             <div className="flex justify-between gap-4 items-center p-4 mt-auto">
                 <p>{movie.Year}</p>
+                <p>{movie.Runtime}</p>
                 <p className="border rounded-sm">{movie.Type}</p>
             </div>
         </div>
