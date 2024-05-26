@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import SamplePic from "../../../../../../public/images/sample-poster.jpg";
 import { BiSolidVideo } from "react-icons/bi";
-import useMovie from "../../../../../../actions/get-show";
 import useShow from "../../../../../../actions/get-show";
 
 interface BodyProps {
