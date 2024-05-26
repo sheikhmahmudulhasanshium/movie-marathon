@@ -24,7 +24,7 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
                     backgroundImage: `url(${movie.Poster !== "N/A" ? movie.Poster : SamplePic.src})`
                 }}
             ></div>
-            <div className="relative flex gap-4 space-x-2 p-4 z-10 ">
+            <div className="relative flex gap-4 space-x-2 pl-28 z-10 ">
                 <div className="rounded-xl">
                     <Image src={movie.Poster !== "N/A" ? movie.Poster : SamplePic} alt="poster" height={200} width={200} className="rounded-xl" />
                 </div>
