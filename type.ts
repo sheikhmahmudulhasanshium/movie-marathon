@@ -33,3 +33,28 @@ export interface ErrorResponse {
 
 export type MovieResponse = Movie | ErrorResponse;
 export type SeriesResponse = Movie | ErrorResponse;
+
+export const Genres = [
+  "Action",
+  "Drama",
+  "Sci-Fi",
+  "Fantasy",
+  "Superhero",
+  "Crime",
+  "Comedy",
+  "Animation",
+  "Horror",
+  "Mystery",
+  "Thriller",
+  "Biography",
+  "Romance",
+  "Adventure",
+  "Reality",
+  "Sports",
+  "Historical",
+  "Music"
+];
+export const Countries = [
+  "USA", "UK", "Canada", "Australia", "France", "Germany",
+  "India", "Japan", "South Korea", "China"
+];

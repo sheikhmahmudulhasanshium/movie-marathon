@@ -97,6 +97,7 @@ const GetData = async (): Promise<Movie[]> => {
 
     const promises = titles.map(title => fetchMovieOrSeriesDetails(title));
     const results = await Promise.all(promises);
+    console.log(results)
     return results.filter(result => result !== null) as Movie[];
 };
 

@@ -1,10 +1,11 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
 import { BiLeftArrow, BiMenu } from "react-icons/bi";
 import ModeToggle from "../../components/mode-toggle";
 import { PiMinusCircleFill, PiPlusCircleFill } from "react-icons/pi";
+import { Countries, Genres } from "../../../../../type";
+import { queue } from "sharp";
 
 const SideNav = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -44,7 +45,6 @@ const SideNav = () => {
                                 <BiLeftArrow className="text-red-700 text-4xl font-bold" />
                                 <span className="text-xl">Close</span>
                             </div>
-                            
                         </div>
                         <div className="flex flex-col space-y-4 w-full flex-grow overflow-y-auto ">
                             <Link href="/">
@@ -59,16 +59,16 @@ const SideNav = () => {
                                 </div>
                                 {showGenre && (
                                     <div className="grid grid-cols-2 gap-2 p-2 bg-slate-600 bg-opacity-15 rounded-xl">
-                                        <div className="col-span-1 p-2">Horror</div>
-                                        <div className="col-span-1 p-2">Action</div>
-                                        <div className="col-span-1 p-2">Comedy</div>
-                                        <div className="col-span-1 p-2">Drama</div>
-                                        <div className="col-span-1 p-2">Science Fiction</div>
-                                        <div className="col-span-1 p-2">Fantasy</div>
-                                        <div className="col-span-1 p-2">Romance</div>
-                                        <div className="col-span-1 p-2">Thriller</div>
-                                        <div className="col-span-1 p-2">Adventure</div>
-                                        <div className="col-span-1 p-2">Animation</div>
+                                        {Genres.map((genre) => (
+                                            <div
+                                                key={genre}
+                                                className="col-span-1 px-1 hover:bg-cyan-500 cursor-pointer"
+                                            >
+                                                <Link  href={{pathname:`/genre/${genre.toLowerCase()}`,query:{genre}}}>
+                                                    <p>{genre}</p>
+                                                </Link>
+                                            </div>
+                                        ))}
                                     </div>
                                 )}
                             </div>
@@ -81,16 +81,16 @@ const SideNav = () => {
                                 </div>
                                 {showCountry && (
                                     <div className="grid grid-cols-2 gap-2 p-2 bg-slate-600 bg-opacity-15 rounded-xl">
-                                        <div className="col-span-1 p-2">USA</div>
-                                        <div className="col-span-1 p-2">UK</div>
-                                        <div className="col-span-1 p-2">Canada</div>
-                                        <div className="col-span-1 p-2">Australia</div>
-                                        <div className="col-span-1 p-2">France</div>
-                                        <div className="col-span-1 p-2">Germany</div>
-                                        <div className="col-span-1 p-2">India</div>
-                                        <div className="col-span-1 p-2">Japan</div>
-                                        <div className="col-span-1 p-2">South Korea</div>
-                                        <div className="col-span-1 p-2">China</div>
+                                        {Countries.map((country) => (
+                                            <div
+                                                key={country}
+                                                className="col-span-1 px-1 hover:bg-cyan-500 cursor-pointer"
+                                            >
+                                                <Link  href={{pathname:`/country/${country.toLowerCase()}`,query:{country}}}>
+                                                    <p>{country}</p>
+                                                </Link>
+                                            </div>
+                                        ))}
                                     </div>
                                 )}
                             </div>
