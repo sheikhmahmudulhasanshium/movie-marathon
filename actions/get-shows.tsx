@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import GetData from "./get-data"; // Adjust the path as needed
 import { Movie } from "../type";
 
-const useSeries = () => {
+const useShows = () => {
     const [series, setSeries] = useState<Movie[]>([]);
 
     useEffect(() => {
@@ -23,4 +23,4 @@ const useSeries = () => {
     return series;
 };
 
-export default useSeries;
+export default useShows;

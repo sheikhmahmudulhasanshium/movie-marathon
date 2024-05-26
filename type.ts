@@ -32,3 +32,4 @@ export interface ErrorResponse {
 }
 
 export type MovieResponse = Movie | ErrorResponse;
+export type SeriesResponse = Movie | ErrorResponse;

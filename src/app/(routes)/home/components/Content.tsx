@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { VscLoading } from "react-icons/vsc";
 import useMovies from "../../../../../actions/get-movies";
-import useSeries from "../../../../../actions/get-tv-series";
+import useSeries from "../../../../../actions/get-shows";
 import Link from "next/link";
 import Card from "../../components/Card";
 
