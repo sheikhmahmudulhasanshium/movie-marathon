@@ -3,7 +3,7 @@ import Image from "next/image";
 import SamplePic from "../../../../../../public/images/sample-poster.jpg";
 import { BiSolidVideo } from "react-icons/bi";
 import useShow from "../../../../../../actions/get-show";
-import useStringToList from "../../../../../../actions/get-string";
+import stringToList from "../../../../../../actions/get-string";
 
 interface BodyProps {
     imdbID: string | null;
@@ -17,10 +17,10 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
 
     if (!series) return null;
 
-    const genres = useStringToList(series.Genre, 'genre');
-    const countries = useStringToList(series.Country, 'country');
-    const actors = useStringToList(series.Actors, 'actors');
-    const productions = useStringToList(series.Production, 'production');
+    const genres = stringToList(series.Genre, 'genre');
+    const countries = stringToList(series.Country, 'country');
+    const actors = stringToList(series.Actors, 'actors');
+    const productions = stringToList(series.Production, 'production');
     
     return (
         <div className="relative flex flex-col justify-center items-center w-full h-screen mt-12">

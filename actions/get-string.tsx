@@ -1,8 +1,8 @@
+// useStringToList.tsx
 import React from "react";
 import Link from "next/link";
 
-const useStringToList = (list: string, listName: string): JSX.Element => {
-    // Check if the list is empty or contains "N/A"
+const stringToList = (list: string, listName: string): JSX.Element => {
     if (!list || list === "N/A") {
         return <p>N/A</p>;
     }
@@ -20,7 +20,6 @@ const useStringToList = (list: string, listName: string): JSX.Element => {
         </Link>
     ));
 
-    // Join the link elements with commas
     const concatenatedLinks = links.map((link, index) => (
         <React.Fragment key={index}>
             {link}
@@ -28,8 +27,7 @@ const useStringToList = (list: string, listName: string): JSX.Element => {
         </React.Fragment>
     ));
 
-    // Wrap the concatenated links inside a paragraph element
     return <p>{concatenatedLinks}</p>;
 };
 
-export default useStringToList;
+export default stringToList;
