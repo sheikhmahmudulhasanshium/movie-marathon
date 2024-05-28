@@ -3,6 +3,7 @@ import Image from "next/image";
 import SamplePic from "../../../../../../public/images/sample-poster.jpg";
 import { BiSolidVideo } from "react-icons/bi";
 import useMovie from "../../../../../../actions/get-movie";
+import useStringToList from "../../../../../../actions/get-string";
 
 interface BodyProps {
     imdbID: string | null;
@@ -16,6 +17,11 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
 
     if (!movie) return null;
 
+    const genres = useStringToList(movie.Genre, 'genre');
+    const countries=useStringToList(movie.Country,'country');
+    const actors=useStringToList(movie.Actors,'actors');
+    const productions=useStringToList(movie.Production,'production');
+    
     return (
         <div className="relative flex flex-col justify-center items-center w-full h-screen mt-12">
             <div
@@ -46,19 +52,19 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Genre:</p>
-                            <p>{movie.Genre}</p>
+                            {genres}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Casts:</p>
-                            <p>{movie.Actors}</p>
+                            {actors}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Country:</p>
-                            <p>{movie.Country}</p>
+                            {countries}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Production:</p>
-                            <p>{movie.Production}</p>
+                            {productions}
                         </div>
                     </div>
                 </div>

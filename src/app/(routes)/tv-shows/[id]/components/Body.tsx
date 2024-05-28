@@ -3,19 +3,25 @@ import Image from "next/image";
 import SamplePic from "../../../../../../public/images/sample-poster.jpg";
 import { BiSolidVideo } from "react-icons/bi";
 import useShow from "../../../../../../actions/get-show";
+import useStringToList from "../../../../../../actions/get-string";
 
 interface BodyProps {
     imdbID: string | null;
 }
 
 const Body: React.FC<BodyProps> = ({ imdbID }) => {
-    const { series,loading, error } = useShow(imdbID);
+    const { series, loading, error } = useShow(imdbID);
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error loading show details: {error}</div>;
+    if (error) return <div>Error loading series details: {error}</div>;
 
     if (!series) return null;
 
+    const genres = useStringToList(series.Genre, 'genre');
+    const countries = useStringToList(series.Country, 'country');
+    const actors = useStringToList(series.Actors, 'actors');
+    const productions = useStringToList(series.Production, 'production');
+    
     return (
         <div className="relative flex flex-col justify-center items-center w-full h-screen mt-12">
             <div
@@ -46,19 +52,19 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Genre:</p>
-                            <p>{series.Genre}</p>
+                            {genres}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Casts:</p>
-                            <p>{series.Actors}</p>
+                            {actors}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Country:</p>
-                            <p>{series.Country}</p>
+                            {countries}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Production:</p>
-                            <p>{series.Production}</p>
+                            {productions}
                         </div>
                     </div>
                 </div>
