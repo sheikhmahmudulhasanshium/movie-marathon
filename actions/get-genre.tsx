@@ -1,7 +1,7 @@
-"use client"
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Movie } from "../type";
 import GetData from "./get-data";
+
 const useGenre = (genre: string | null) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -19,7 +19,15 @@ const useGenre = (genre: string | null) => {
                         const genres = movie.Genre.split(", ");
                         return genre && genres.includes(genre);
                     });
-                    setGenreMovies(filteredMovies);
+
+                    // Remove duplicates based on imdbID
+                    const uniqueMovies = filteredMovies.filter((movie, index, self) =>
+                        index === self.findIndex((m) => (
+                            m.imdbID === movie.imdbID
+                        ))
+                    );
+
+                    setGenreMovies(uniqueMovies);
                 }
             } catch (error) {
                 console.error("Error fetching movies:", error);
@@ -29,7 +37,9 @@ const useGenre = (genre: string | null) => {
             }
         };
 
-        fetchMoviesByGenre();
+        if (genre) {
+            fetchMoviesByGenre();
+        }
     }, [genre]);
 
     return { movieIds: genreMovies, loading, error };
