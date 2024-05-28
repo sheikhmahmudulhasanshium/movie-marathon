@@ -25,12 +25,12 @@ const useSuggestions = (genres: string | undefined) => {
 
                         // Sort movies by IMDb rating (descending) and filter within the range of 8 to 10
                         const topRatedMovies = data
-                            .filter(movie => parseFloat(movie.imdbRating) >= 8 && parseFloat(movie.imdbRating) <= 10)
+                            .filter(movie => parseFloat(movie.imdbRating) >= 7 && parseFloat(movie.imdbRating) <= 10)
                             .sort((a, b) => parseFloat(b.imdbRating) - parseFloat(a.imdbRating));
 
                         // Take the top 6 movies from each category
-                        const topSimilarGenreMovies = similarGenreMovies.slice(0, 6);
-                        const topImdbRatedMovies = topRatedMovies.slice(0, 6);
+                        const topSimilarGenreMovies = similarGenreMovies.slice(0, 9);
+                        const topImdbRatedMovies = topRatedMovies.slice(0, 9);
 
                         // Combine the movies ensuring no duplicates
                         const combinedMovies = Array.from(new Set([...topSimilarGenreMovies, ...topImdbRatedMovies]));
