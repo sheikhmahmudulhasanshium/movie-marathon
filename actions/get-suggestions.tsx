@@ -1,9 +1,10 @@
+// useSuggestions.tsx
 import { useState, useEffect } from 'react';
 import useGenre from './get-genre';
 import { Movie } from '../type';
 import GetData from './get-data'; // Assuming GetData fetches the movie data
 
-const useSuggestions = (genres: string | undefined) => {
+const useSuggestions = (genres: string | undefined, director: string | undefined, movieName: string | undefined, imdbID: string | null) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [suggestedMovies, setSuggestedMovies] = useState<Movie[]>([]);
@@ -13,27 +14,38 @@ const useSuggestions = (genres: string | undefined) => {
 
     useEffect(() => {
         const fetchSuggestions = async () => {
-            if (genreArray) {
+            if (genreArray || director || movieName) {
                 try {
                     const data = await GetData();
                     if (data !== null) {
+                        // Filter out the movie with the same IMDb ID
+                        const filteredData = data.filter(movie => movie.imdbID !== imdbID);
+
                         // Filter movies based on genre similarity
-                        const similarGenreMovies = data.filter(movie => {
+                        const similarGenreMovies = filteredData.filter(movie => {
                             const movieGenres = movie.Genre.split(", ").map(genre => genre.trim());
-                            return genreArray.some(genre => movieGenres.includes(genre));
+                            return genreArray?.some(genre => movieGenres.includes(genre));
                         });
 
-                        // Sort movies by IMDb rating (descending) and filter within the range of 8 to 10
-                        const topRatedMovies = data
+                        // Filter movies by the same director
+                        const sameDirectorMovies = director ? filteredData.filter(movie => movie.Director === director) : [];
+
+                        // Filter movies with similar names
+                        const similarNameMovies = movieName ? filteredData.filter(movie => movie.Title.toLowerCase().includes(movieName.toLowerCase())) : [];
+
+                        // Sort movies by IMDb rating (descending) and filter within the range of 7 to 10
+                        const topRatedMovies = filteredData
                             .filter(movie => parseFloat(movie.imdbRating) >= 7 && parseFloat(movie.imdbRating) <= 10)
                             .sort((a, b) => parseFloat(b.imdbRating) - parseFloat(a.imdbRating));
 
-                        // Take the top 6 movies from each category
-                        const topSimilarGenreMovies = similarGenreMovies.slice(0, 9);
-                        const topImdbRatedMovies = topRatedMovies.slice(0, 9);
+                        // Take the top 6 movies from the same director
+                        const topSameDirectorMovies = sameDirectorMovies.slice(0, 6);
 
-                        // Combine the movies ensuring no duplicates
-                        const combinedMovies = Array.from(new Set([...topSimilarGenreMovies, ...topImdbRatedMovies]));
+                        // Take the top 4 movies with similar names
+                        const topSimilarNameMovies = similarNameMovies.slice(0, 6);
+
+                        // Combine the movies ensuring no duplicates, prioritizing same director and similar name movies
+                        const combinedMovies = Array.from(new Set([...topSameDirectorMovies, ...topSimilarNameMovies, ...similarGenreMovies, ...topRatedMovies]));
 
                         setSuggestedMovies(combinedMovies);
                     }
@@ -50,7 +62,7 @@ const useSuggestions = (genres: string | undefined) => {
         };
 
         fetchSuggestions();
-    }, [genreArray]);
+    }, [genreArray, director, movieName, imdbID]);
 
     return { suggestedMovies, loading, error };
 };
