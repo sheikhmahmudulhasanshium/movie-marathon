@@ -53,7 +53,7 @@ const GetData = async (): Promise<Movie[]> => {
         "Firestarter",
         "The Inspection",
         "Babylon",
-        "White Bird: A Wonder Story",
+        "A Monster Calls",
         "Ticket to Paradise",
         "Wendell & Wild",
         "House of the Dragon",
