@@ -20,12 +20,12 @@ const Container: React.FC<ContainerProps> = ({ genre }) => {
 
     // Check if movieIds array is empty
     if (movieIds.length === 0) {
-        return <div className='h-screen pt-4'>No movie currently available in "{genre}" genre.</div>; // Don't render anything if the genre has no movies
+        return <div className='h-screen pt-4'>No movie currently available in &quot;{genre}&quot; genre.</div>; // Don't render anything if the genre has no movies
     }
 
     return (
         <div className='flex flex-col gap-y-8 justify-between'>
-            <p className=' text-center py-8'>Showing Movies & TV Shows from "{genre}" Genre</p>
+            <p className=' text-center py-8'>Showing Movies & TV Shows from &quot;{genre}&quot; Genre</p>
             
             <div className='flex flex-col justify-between px-4'>
                 <p className='text-4xl font-serif font-thin pb-8'>{genre} :</p>
