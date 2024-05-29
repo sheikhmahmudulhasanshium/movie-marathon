@@ -21,7 +21,8 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
     const countries = stringToList(movie.Country, 'country');
     const actors = stringToList(movie.Actors, 'actors');
     const productions = stringToList(movie.Production, 'production');
-    
+    const directors= stringToList(movie.Director,"director")
+
     return (
         <div className="relative flex flex-col justify-center items-center w-full h-screen mt-12">
             <div
@@ -42,10 +43,10 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
                             <BiSolidVideo className="text-2xl" />
                         </div>
                         <div className="border border-white p-1 bg-cyan-950 bg-opacity-30 flex text-white m-1 rounded-md">HD</div>
-                        <p className="text-orange-400 text-xl font-bold">IMDB: {movie.imdbRating}</p>
+                        <p className="text-orange-800 dark:text-orange-400 text-xl font-bold bg-opacity-30 bg-slate-400 rounded-xl p-1">IMDB: {movie.imdbRating}</p>
                     </div>
                     <div className="text-base text-cyan-950 dark:text-white mt-3 space-y-4">
-                        <p className="text-justify items-center w-6/12">{movie.Plot}</p>
+                        <p className="text-justify items-center w-10/12">{movie.Plot}</p>
                         <div className="flex gap-2">
                             <p className="font-bold">Released:</p>
                             <p>{movie.Released}</p>
@@ -57,6 +58,10 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
                         <div className="flex gap-2">
                             <p className="font-bold">Casts:</p>
                             {actors}
+                        </div>
+                        <div className="flex gap-2">
+                            <p className="font-bold">Director:</p>
+                            {directors}
                         </div>
                         <div className="flex gap-2">
                             <p className="font-bold">Country:</p>

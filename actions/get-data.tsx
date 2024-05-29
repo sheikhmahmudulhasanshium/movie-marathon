@@ -3,7 +3,7 @@ import { setDefaultValues } from "../data/utils";
 import { Movie } from "../type";
 
 const fetchMovieOrSeriesDetails = async (title: string): Promise<Movie | null> => {
-    const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&t=${encodeURIComponent(title)}`);
+    const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&t=${encodeURIComponent(title)}&plot=full`);
     const data = await response.json();
     if (data.Response === "True") {
         return setDefaultValues(data);

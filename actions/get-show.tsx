@@ -15,7 +15,7 @@ const useShow = (imdbID: string | null) => {
 
         const fetchSeries = async () => {
             try {
-                const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&i=${imdbID}`);
+                const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&i=${imdbID}&plot=full`);
                 const data: SeriesResponse | ErrorResponse = await response.json();
 
                 if ("Error" in data) {
