@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 import { BiSearch } from 'react-icons/bi';
-import Link from 'next/link';
 import { CgSearchLoading } from 'react-icons/cg';
 import ReplacementImage from "../../../../public/images/sample-poster.jpg"
 import { Movie } from '../../../../type';
 import GetData from '../../../../actions/get-data'; // Assuming this imports the preloaded dataset
 import stringSimilarity from 'string-similarity'; // Import the string similarity library
+import { useRouter } from 'next/navigation';
 
 const SearchBar = () => {
     const [searchText, setSearchText] = useState<string>('');
@@ -16,6 +16,8 @@ const SearchBar = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [displayCount, setDisplayCount] = useState<number>(10);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+    const router = useRouter();
 
     useEffect(() => {
         if (!searchText.trim()) {
@@ -78,12 +80,25 @@ const SearchBar = () => {
 
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter') {
-            console.log("Searching for:", searchText);
+            if (selectedIndex >= 0 && selectedIndex < filteredMovies.length) {
+                const selectedMovie = filteredMovies[selectedIndex];
+                router.push(`/movies/${selectedMovie.imdbID}?id=${selectedMovie.imdbID}`);
+            } else {
+                console.log("Searching for:", searchText);
+            }
+        } else if (e.key === 'ArrowDown') {
+            setSelectedIndex((prevIndex) => (prevIndex + 1) % filteredMovies.length);
+        } else if (e.key === 'ArrowUp') {
+            setSelectedIndex((prevIndex) => (prevIndex - 1 + filteredMovies.length) % filteredMovies.length);
         }
     };
 
     const loadMoreResults = () => {
         setDisplayCount(prevCount => prevCount + 10);
+    };
+
+    const handleResultClick = (imdbID: string) => {
+        router.push(`/movies/${imdbID}?id=${imdbID}`);
     };
 
     return (
@@ -95,7 +110,7 @@ const SearchBar = () => {
                     placeholder="Enter Keywords..."
                     value={searchText}
                     onChange={handleInputChange}
-                    onKeyPress={handleKeyPress}
+                    onKeyDown={handleKeyPress}
                 />
                 <div className="w-1/12 flex items-center justify-center text-white">
                     {searchText.length > 0 && (
@@ -122,24 +137,26 @@ const SearchBar = () => {
                 <div className="absolute bg-white border border-gray-300 rounded-lg mt-2 p-4 w-full max-w-lg max-h-80 overflow-y-auto z-30">
                     <h2 className="text-xl font-bold mb-2">Search Results</h2>
                     <div className='flex flex-col'>
-                        {filteredMovies.slice(0, displayCount).map(movie => (
-                            <Link href={{pathname: `/movies/${movie.imdbID}`,query: {id: movie.imdbID,},}} key={movie.imdbID}>
-                                <div className="mb-2 text-xl flex items-center space-x-2 text-blue-950">
-                                    <div>
-                                        <Image 
-                                            src={movie.Poster !== "N/A" ? movie.Poster : ReplacementImage} 
-                                            alt="poster" 
-                                            height={30} 
-                                            width={30}
-                                        />
-                                    </div>
-                                    <div className='text-start'>{movie.Title}</div>
-                                    <BiSearch />
+                        {filteredMovies.slice(0, displayCount).map((movie, index) => (
+                            <div
+                                key={movie.imdbID}
+                                className={`mb-2 text-xl flex items-center space-x-2 text-blue-950 cursor-pointer ${index === selectedIndex ? 'bg-gray-300 border-l-4 border-blue-500' : ''}`}
+                                onClick={() => handleResultClick(movie.imdbID)}
+                            >
+                                <div>
+                                    <Image
+                                        src={movie.Poster !== "N/A" ? movie.Poster : ReplacementImage}
+                                        alt="poster"
+                                        height={30}
+                                        width={30}
+                                    />
                                 </div>
-                            </Link>
+                                <div className='text-start'>{movie.Title}</div>
+                                <BiSearch />
+                            </div>
                         ))}
                         {filteredMovies.length > displayCount && (
-                            <button 
+                            <button
                                 className="mt-2 text-blue-500 hover:underline"
                                 onClick={loadMoreResults}
                             >
