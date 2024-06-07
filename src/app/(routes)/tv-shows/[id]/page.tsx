@@ -6,6 +6,7 @@ import SearchBar from "../../components/SearchBar";
 import SocialHandle from "../../components/Social-Handle";
 import Body from "./components/Body";
 import Suggestions from "../../components/Suggestions";
+import Details from '../../components/Details';
 
 const Show: React.FC = () => {
     const searchParams = useSearchParams();
@@ -19,6 +20,7 @@ const Show: React.FC = () => {
             <div className="flex flex-col justify-center items-center ">
                 <SearchBar />
                 <Body imdbID={imdbID} />
+                <Details imdbID={imdbID} movieType='series'/>
                 <SocialHandle />
                 <Suggestions imdbID={imdbID}/>
                 <Footer />

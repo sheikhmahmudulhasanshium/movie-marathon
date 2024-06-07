@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/images/favicon.ico" className="rounded-sm"/>
+        <link rel="icon" href="/images/favicon.ico" className=""/>
       </head>
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="system">
