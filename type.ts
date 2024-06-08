@@ -34,6 +34,21 @@ export interface Episode {
   imdbID: string;
 }
 
+export interface SeasonData {
+  Title: string;
+  Season: string;
+  totalSeasons: string;
+  Episodes: Episode[];
+  Response: string;
+}
+
+export interface APIError {
+  Response: string;
+  Error: string;
+}
+
+export type APIResponse = SeasonData | APIError;
+
 export interface ErrorResponse {
   Response: string;
   Error: string;

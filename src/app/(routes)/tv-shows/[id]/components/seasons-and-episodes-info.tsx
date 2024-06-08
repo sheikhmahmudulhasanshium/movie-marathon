@@ -1,60 +1,83 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import { FaList, FaPlay } from "react-icons/fa";
 import useShow from "../../../../../../actions/get-show";
-import { FaList } from 'react-icons/fa';
-import { FiPlay } from 'react-icons/fi';
-import useSeasonInfo from '../../../../../../actions/get-season-info';
+import { useState } from "react";
+import useSeasonInfo from "../../../../../../actions/get-season-info";
+import Link from "next/link";
 
 interface SeasonInfoCardProps {
   imdbID: string | null;
 }
 
 const SeasonInfoCard: React.FC<SeasonInfoCardProps> = ({ imdbID }) => {
-  const { series, error, loading } = useShow(imdbID);
+  const [selectedSeason, setSelectedSeason] = useState("1");
 
-  const totalSeasons = series?.totalSeasons || '1';
-  const numericTotalSeasons = parseInt(totalSeasons, 10);
-  const seasons = Array.from({ length: numericTotalSeasons }, (_, index) => index + 1);
+  const { series, error: showError, loading: showLoading } = useShow(imdbID);
+  const { data: episodesData, loading: seasonLoading, error: seasonError } = useSeasonInfo(imdbID, selectedSeason);
 
-  const [selectedSeason, setSelectedSeason] = useState(`Season 1`);
-  useEffect(() => {
-    if (numericTotalSeasons > 0) {
-      setSelectedSeason(`Season 1`);
+  if (showError || seasonError) {
+    return <div>Season Error Occurred.</div>;
+  }
+
+  if (showLoading || seasonLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (series && episodesData) {
+    const totalSeasons = parseInt(series.totalSeasons || "1", 10);
+
+    const options = [];
+    for (let i = 1; i <= totalSeasons; i++) {
+      options.push(
+        <option key={i} value={i} className="text-xl text-center dark:text-cyan-950">
+          Season {i}
+        </option>
+      );
     }
-  }, [numericTotalSeasons]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data</p>;
+    const totalEpisodes = episodesData.Episodes.length;
 
-  return (
-    <div className="bg-slate-600 flex w-max sm:w-max md:w-screen lg:w-full justify-between p-2 flex-col mt-20">
-      <div className='flex justify-start items-start text-xl lg:px-12 gap-4 pt-8'>
-        <FaList className='text-3xl' />
-        <select
-          className='bg-transparent'
-          value={selectedSeason}
-          onChange={e => setSelectedSeason(e.target.value)}
-        >
-          {seasons.map(season => (
-            <option className="bg-slate-400" key={season} value={`Season ${season}`}>
-              Season {season}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className='flex items-center pt-12 lg:px-12'>
-        <div className='grid grid-cols-3 justify-start'>
-            {
-              <div className='col-span-1 flex justify-start items-center gap-2 bg-slate-700 p-3 rounded-lg ml-8'>
-                  <FiPlay />
-                  <p>Ep {'episode.Episode.episodes.'}:</p>
-                  <p>{'episode.Title'}</p>
-              </div>
-            }
+    const episodes = [];
+    for (let i = 0; i < totalEpisodes; i++) {
+      episodes.push(
+        <div key={i} className="flex bg-slate-400 rounded-xl hover:bg-opacity-35 hover:font-bold items-center">
+          <Link href={{ pathname: `/tv-shows/${episodesData.Episodes[i].imdbID}/`, query: {id:`${episodesData.Episodes[i].imdbID}`, season: selectedSeason } }}>
+            <div className="flex gap-2 px-4 py-1.5 items-center">
+              <FaPlay className="text-xl" />
+              <p className="text-lg font-serif flex gap-1">
+                <span>Episode {i + 1}:</span>
+              </p>
+              <p className="text-lg font-serif">{episodesData.Episodes[i].Title}</p>
+            </div>
+          </Link>
+        </div>
+      );
+    }
+
+    return (
+      <div className="py-24 flex px-8 text-cyan-800 justify-between">
+        <div className="flex justify-between flex-col">
+          <div className="flex justify-start text-3xl items-center gap-2">
+            <FaList />
+            <select
+              className="bg-transparent space-x-2"
+              value={selectedSeason}
+              onChange={(e) => setSelectedSeason(e.target.value)}
+            >
+              {options}
+            </select>
+          </div>
+          <div className="flex justify-center items-center">
+            <div className="grid grid-cols-2 py-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              {episodes}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 export default SeasonInfoCard;
