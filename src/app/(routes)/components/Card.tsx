@@ -11,12 +11,12 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ movie }) => {
     const posterSrc = movie.Poster !== "N/A" ? movie.Poster : SamplePoster;
     const truncatedTitle = movie.Title.length > 20 ? `${movie.Title.substring(0, 10)}...` : movie.Title;
-
+    const movieType=movie.Type==="movie"?"movies":"tv-shows"
     return (
         <div className="flex flex-col rounded-lg col-span-1 bg-slate-500 m-2 hover:opacity-85">
             <Link
                 href={{
-                    pathname: `/movies/${movie.imdbID}`,
+                    pathname: `/${movieType}/${movie.imdbID}`,
                     query: {
                         id: movie.imdbID,
                         },
