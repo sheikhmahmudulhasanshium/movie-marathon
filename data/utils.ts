@@ -22,6 +22,7 @@ export const setDefaultValues = (movie: any): Movie => {
         imdbVotes: movie.imdbVotes || "N/A",
         imdbID: movie.imdbID || "N/A",
         Type: movie.Type || "N/A",
+        totalSeasons:movie.totalSeasons || "N/A",
         DVD: movie.DVD || "N/A",
         BoxOffice: movie.BoxOffice || "N/A",
         Production: movie.Production || "N/A",

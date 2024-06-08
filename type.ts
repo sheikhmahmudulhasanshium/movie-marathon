@@ -19,6 +19,7 @@ export interface Movie {
   imdbVotes: string;
   imdbID: string;
   Type: string;
+  totalSeasons:number;
   DVD: string;
   BoxOffice: string;
   Production: string;
