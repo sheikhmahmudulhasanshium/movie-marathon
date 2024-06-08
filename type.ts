@@ -19,12 +19,19 @@ export interface Movie {
   imdbVotes: string;
   imdbID: string;
   Type: string;
-  totalSeasons:number;
+  totalSeasons:string|undefined;
   DVD: string;
   BoxOffice: string;
   Production: string;
   Website: string;
   Response: string;
+}
+export interface Episode {
+  Title: string;
+  Released: string;
+  Episode: string;
+  imdbRating: string;
+  imdbID: string;
 }
 
 export interface ErrorResponse {
@@ -33,7 +40,6 @@ export interface ErrorResponse {
 }
 
 export type MovieResponse = Movie | ErrorResponse;
-export type SeriesResponse = Movie | ErrorResponse;
 
 export const Genres = [
   "Action",

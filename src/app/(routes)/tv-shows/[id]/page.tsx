@@ -22,7 +22,7 @@ const Show: React.FC = () => {
                 <SearchBar />
                 
                 <Body imdbID={imdbID} />
-                <SeasonInfoCard />
+                <SeasonInfoCard imdbID={imdbID}/>
                 <Details imdbID={imdbID} movieType='series'/>
                 <SocialHandle />
                 <Suggestions imdbID={imdbID}/>
