@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
-import { Movie, SeriesResponse, ErrorResponse } from "../type"; // Adjust the path as necessary
+import { Movie, ErrorResponse } from "../type"; // Adjust the path as necessary
 
 const useShow = (imdbID: string | null) => {
     const [series, setSeries] = useState<Movie | null>(null);
@@ -16,13 +16,13 @@ const useShow = (imdbID: string | null) => {
         const fetchSeries = async () => {
             try {
                 const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&i=${imdbID}`);
-                const data: SeriesResponse | ErrorResponse = await response.json();
+                const data: Movie | ErrorResponse = await response.json();
 
                 if ("Error" in data) {
                     setError(data.Error);
                     setSeries(null);
                 } else {
-                    setSeries(data as Movie);
+                    setSeries(data);
                     setError(null);
                 }
             } catch (error) {

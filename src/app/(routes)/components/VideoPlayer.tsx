@@ -7,6 +7,7 @@ interface VideoPlayerProps {
     movie: Movie;
 }
 
+
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ imdbID,movie }) => {
     const movieType=movie.Type
     if(movieType==="series"){
