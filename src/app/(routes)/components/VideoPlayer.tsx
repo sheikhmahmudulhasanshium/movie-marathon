@@ -3,15 +3,15 @@
 import { Movie } from "../../../../type";
 
 interface VideoPlayerProps {
-    imdbID: string;
-    movie: Movie;
+    imdbID: string|null;
+    movie: Movie|null;
 }
 
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ imdbID,movie }) => {
-    const movieType=movie.Type
+    const movieType=movie?.Type
     if(movieType==="series"){
-       const totalSeasons= movie.totalSeasons
+       const totalSeasons= movie?.totalSeasons
        return (
         <div className="flex justify-center items-center w-full h-full absolute top-0 left-0">
             <div className="relative w-[100%] max-w-5xl h-full">

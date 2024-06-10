@@ -41,6 +41,32 @@ export interface SeasonData {
   Episodes: Episode[];
   Response: string;
 }
+export interface IndividualEpisode {
+  Title: string;
+  Year:string
+  Released: string;
+  Season: string;
+  Episode: string;
+  RunTime: string;
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Production: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: { Source: string; Value: string }[];
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  imdbID: string;
+  seriesID: string;
+  Type: string;
+  Response: string;
+}
 
 export interface APIError {
   Response: string;

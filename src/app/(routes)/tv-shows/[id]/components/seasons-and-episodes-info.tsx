@@ -4,6 +4,7 @@ import useShow from "../../../../../../actions/get-show";
 import { useState } from "react";
 import useSeasonInfo from "../../../../../../actions/get-season-info";
 import Link from "next/link";
+//import useEpisode from "../../../../../../actions/get-episode";
 
 interface SeasonInfoCardProps {
   imdbID: string | null;
@@ -11,8 +12,12 @@ interface SeasonInfoCardProps {
 
 const SeasonInfoCard: React.FC<SeasonInfoCardProps> = ({ imdbID }) => {
   const [selectedSeason, setSelectedSeason] = useState("1");
-
+  
   const { series, error: showError, loading: showLoading } = useShow(imdbID);
+  /*if(series?.Type==="episode"){
+    const {loading,error,episode}= useEpisode(series.imdbID)
+    setSelectedSeason(episode?.Season||"1")
+  }*/
   const { data: episodesData, loading: seasonLoading, error: seasonError } = useSeasonInfo(imdbID, selectedSeason);
 
   if (showError || seasonError) {
@@ -41,7 +46,7 @@ const SeasonInfoCard: React.FC<SeasonInfoCardProps> = ({ imdbID }) => {
     for (let i = 0; i < totalEpisodes; i++) {
       episodes.push(
         <div key={i} className="flex bg-slate-400 rounded-xl hover:bg-opacity-35 hover:font-bold items-center">
-          <Link href={{ pathname: `/tv-shows/${episodesData.Episodes[i].imdbID}/`, query: { season: selectedSeason } }}>
+          <Link href={{ pathname: `/tv-shows/${imdbID}/season-${episodesData.Season}/episode-${episodesData.Episodes[i].Episode}/`, query: {seriesId:imdbID, season:episodesData.Season, episodeId:episodesData.Episodes[i].imdbID} }}>
             <div className="flex gap-2 px-4 py-1.5 items-center">
               <FaPlay className="text-xl" />
               <p className="text-lg font-serif flex gap-1">
@@ -53,7 +58,7 @@ const SeasonInfoCard: React.FC<SeasonInfoCardProps> = ({ imdbID }) => {
         </div>
       );
     }
-
+    
     return (
       <div className="py-24 flex px-8 text-cyan-800 justify-between">
         <div className="flex justify-between flex-col">

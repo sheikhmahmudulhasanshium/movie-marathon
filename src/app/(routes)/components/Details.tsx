@@ -4,6 +4,8 @@ import useShow from "../../../../actions/get-show";
 import stringToList from "../../../../actions/get-string";
 import SamplePic from "../../../../public/images/sample-poster.jpg";
 import Image from "next/image";
+import useEpisode from "../../../../actions/get-episode";
+import Link from "next/link";
 
 interface DetailsProps {
     imdbID: string | null;
@@ -13,10 +15,12 @@ interface DetailsProps {
 const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
     const { movie, loading: movieLoading, error: movieError } = useMovie(imdbID);
     const { series, loading: seriesLoading, error: seriesError } = useShow(imdbID);
+    const {episode, loading:episodeLoading, error:episodeError}=useEpisode(imdbID);
+    const seriesNameFromEpisode=useShow(episode?.seriesID||null).series?.Title
 
-    const loading = movieType === "movie" ? movieLoading : seriesLoading;
-    const error = movieType === "movie" ? movieError : seriesError;
-    const data = movieType === "movie" ? movie : series;
+    const loading = movieType === "movie" ? movieLoading : movieType==="series"? seriesLoading:episodeLoading;
+    const error = movieType === "movie" ? movieError : movieType==="series"? seriesError:episodeError;
+    const data = movieType === "movie" ? movie : movieType==="series"? series:episode;
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error loading details: {error}</div>;
@@ -27,7 +31,8 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
     const actors = stringToList(data.Actors, 'actors');
     const productions = stringToList(data.Production, 'production');
     const directors = stringToList(data.Director, "director");
-
+    const writers = stringToList(data.Writer, "writer");
+    
     return (
         <div className="relative flex gap-4 space-x-2 pl-44 z-10 my-12">
             <div className="rounded-xl">
@@ -50,10 +55,31 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
                         <p className="font-bold">Released:</p>
                         <p>{data.Released}</p>
                     </div>
+
                     <div className="flex gap-2">
                         <p className="font-bold">Genre:</p>
                         {genres}
                     </div>
+                    {episode?.Type==="episode" &&
+                        <div className="flex  ">
+                            <Link className="flex gap-2" href={{pathname: `/tv-shows/${episode.seriesID}`,query: { id: episode.seriesID },}}>
+                                <p className="font-bold ">Series Name:</p>
+                                <p className="hover:underline" >{seriesNameFromEpisode}</p>
+                            </Link>
+                        </div>
+                    }
+                    {episode?.Type==="episode"&&
+                        <div className="flex gap-2">
+                            <p className="font-bold">Season:</p>
+                            {episode.Season}
+                        </div>
+                    }
+                    {episode?.Type==="episode"&&
+                        <div className="flex gap-2">
+                            <p className="font-bold">Episode:</p>
+                            {episode.Episode}
+                        </div>
+                    }
                     <div className="flex gap-2">
                         <p className="font-bold">Casts:</p>
                         {actors}
@@ -61,6 +87,10 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
                     <div className="flex gap-2">
                         <p className="font-bold">Director:</p>
                         {directors}
+                    </div>
+                    <div className="flex gap-2">
+                        <p className="font-bold">Writer:</p>
+                        {writers}
                     </div>
                     <div className="flex gap-2">
                         <p className="font-bold">Country:</p>
