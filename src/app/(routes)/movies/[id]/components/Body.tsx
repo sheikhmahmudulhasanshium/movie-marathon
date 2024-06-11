@@ -1,4 +1,3 @@
-// Body.tsx
 import React, { useState } from "react";
 import SamplePic from "../../../../../../public/images/sample-poster.jpg";
 import useMovie from "../../../../../../actions/get-movie";
