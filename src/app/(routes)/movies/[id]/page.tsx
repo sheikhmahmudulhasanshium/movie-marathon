@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -10,34 +10,19 @@ import Body from "./components/Body";
 import Suggestions from "../../components/Suggestions";
 import Details from '../../components/Details';
 import Head from "next/head";
+import useMovie from '../../../../../actions/get-movie';
 
-interface MovieProps {
-    imdbID: string;
-    movie: any;
-}
-
-const fetchMovie = async (imdbID: string) => {
-    const res = await fetch(`/api/movie?id=${imdbID}`);
-    if (!res.ok) {
-        throw new Error('Failed to fetch movie data');
-    }
-    const movie = await res.json();
-    return movie;
-};
-
-const Movie: React.FC<MovieProps> = ({ imdbID, movie: initialMovie }) => {
-    const [movie, setMovie] = useState(initialMovie);
+const Movie: React.FC = () => {
+    const searchParams = useSearchParams();
+    const imdbID = searchParams.get("id");
+    const { movie, loading, error } = useMovie(imdbID);
     const [metaTagsSet, setMetaTagsSet] = useState(false);
 
     useEffect(() => {
-        if (!movie && imdbID) {
-            fetchMovie(imdbID).then(setMovie).catch(console.error);
-        } else if (movie) {
+        if (movie && !metaTagsSet) {
             setMetaTagsSet(true);
         }
-    }, [imdbID, movie]);
-
-    if (!movie) return <div>Loading...</div>;
+    }, [movie, metaTagsSet]);
 
     return (
         <>
