@@ -158,3 +158,37 @@ export const countryInitials: { [key: string]: string } = {
   "Uzbekistan": "UZ", "Vanuatu": "VU", "Vatican City": "VA", "Venezuela": "VE", "Vietnam": "VN", "Yemen": "YE", 
   "Zambia": "ZM", "Zimbabwe": "ZW"
 };
+export interface Trailer {
+  id: string;
+  youtube_video_id: string;
+  youtube_channel_id: string;
+  youtube_thumbnail: string;
+  title: string;
+  thumbnail: string;
+  language: string;
+  categories: string[];
+  published: string;
+  views: number;
+}
+
+export interface Video {
+  id: string;
+  youtube_video_id: string;
+  youtube_thumbnail: string;
+  title: string;
+  published: string;
+  views: number;
+}
+
+export interface TrailerData {
+  id: string;
+  tmdb_id: number;
+  imdb_id: string;
+  language: string;
+  title: string;
+  url: string;
+  trailer: Trailer;
+  videos: Video[];
+  status:string;
+  error:string;
+}
