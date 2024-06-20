@@ -12,7 +12,7 @@ const Servers: React.FC<ServerProps> = ({ selectedServer, onSelectServer }) => {
     return (
         <div className="flex flex-col justify-between items-center bg-slate-600 dark:bg-slate-950 text-cyan-950 dark:text-white md:w-max sm:w-max w-max lg:w-max p-12 bg-opacity-5 dark:bg-opacity-15 rounded-lg">
             <p className="text-center text-lg mb-4">
-                If current server doesn't work please try other servers below.
+                If current server doesn&apos;t work please try other servers below.
             </p>
             <div className="grid grid-cols-2 justify-center items-center gap-12 py-2 m-2">
                 {serverList.map((server, index) => (
