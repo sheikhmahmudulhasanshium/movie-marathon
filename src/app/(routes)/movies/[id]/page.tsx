@@ -11,18 +11,25 @@ import Suggestions from "../../components/Suggestions";
 import Details from '../../components/Details';
 import Head from "next/head";
 import useMovie from '../../../../../actions/get-movie';
+import Servers from '../../components/Servers';
+import VideoPlayer from '../../components/VideoPlayer';
 
 const Movie: React.FC = () => {
     const searchParams = useSearchParams();
     const imdbID = searchParams.get("id");
     const { movie, loading, error } = useMovie(imdbID);
     const [metaTagsSet, setMetaTagsSet] = useState(false);
+    const [selectedServer, setSelectedServer] = useState<number>(0);
 
     useEffect(() => {
         if (movie && !metaTagsSet) {
             setMetaTagsSet(true);
         }
     }, [movie, metaTagsSet]);
+
+    const handleServerSelect = (index: number) => {
+        setSelectedServer(index);
+    };
 
     return (
         <>

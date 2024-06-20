@@ -1,4 +1,3 @@
-// Body.tsx
 import React, { useState } from "react";
 import SamplePic from "../../../../../../public/images/sample-poster.jpg";
 import { FaCirclePlay } from "react-icons/fa6";
@@ -12,6 +11,11 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({ imdbID }) => {
     const { series, loading, error } = useShow(imdbID);
     const [showVideo, setShowVideo] = useState(false);
+    const [selectedServer, setSelectedServer] = useState<number>(0);
+
+    const handleServerSelect = (index: number) => {
+        setSelectedServer(index);
+    };
 
     if (error) return <div>Error loading series details: {error}</div>;
 
@@ -20,7 +24,14 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
     return (
         <div className="relative flex flex-col justify-center items-center my-12 w-full h-screen">
             {showVideo && imdbID ? (
-                <div className=" flex justify-center items-center "><VideoPlayer imdbID={imdbID} movie={series}/></div>
+                <div className="flex justify-center items-center w-full h-full">
+                    <VideoPlayer
+                        imdbID={imdbID}
+                        movie={series}
+                        selectedServer={selectedServer}
+                        onSelectServer={handleServerSelect}
+                    />
+                </div>
             ) : (
                 <>
                     <div
@@ -41,4 +52,3 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
 };
 
 export default Body;
-

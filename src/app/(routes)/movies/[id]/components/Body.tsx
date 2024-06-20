@@ -11,6 +11,11 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({ imdbID }) => {
     const { movie, loading, error } = useMovie(imdbID);
     const [showVideo, setShowVideo] = useState(false);
+    const [selectedServer, setSelectedServer] = useState<number>(0);
+
+    const handleServerSelect = (index: number) => {
+        setSelectedServer(index);
+    };
 
     if (error) return <div>Error loading movie details: {error}</div>;
 
@@ -19,7 +24,14 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
     return (
         <div className="relative flex flex-col justify-center items-center my-12 w-full h-screen">
             {showVideo && imdbID ? (
-                <div className=" flex justify-center items-center "><VideoPlayer imdbID={imdbID} movie={movie}/></div>
+                <div className="flex justify-center items-center w-full h-full">
+                    <VideoPlayer
+                        imdbID={imdbID}
+                        movie={movie}
+                        selectedServer={selectedServer}
+                        onSelectServer={handleServerSelect}
+                    />
+                </div>
             ) : (
                 <>
                     <div
