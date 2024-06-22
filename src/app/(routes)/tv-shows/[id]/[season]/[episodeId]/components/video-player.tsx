@@ -18,9 +18,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ episodeId }) => {
     if (loading) return <div>Loading...</div>;
     if (!episode) return null;
 
-    const serverUrl = selectedServer === 0
-        ? `https://vidsrc.net/embed/tv/${episode.seriesID}/${parseInt(episode.Season, 10)}/${parseInt(episode.Episode, 10)}`
-        : `https://moviesapi.club/tv/${episode.seriesID}-${episode.Season}-${episode.Episode}`;
+    const seriesID = episode.seriesID;
+    const season = parseInt(episode.Season, 10);
+    const episodeNum = parseInt(episode.Episode, 10);
+
+    const serverUrls = [
+        `https://vidsrc.net/embed/tv/${seriesID}/${season}/${episodeNum}`,
+        `https://moviesapi.club/tv/${seriesID}-${season}-${episodeNum}`,
+        `https://www.2embed.cc/embedtv/${seriesID}&s=${season}&e=${episodeNum}`
+    ];
 
     return (
         <div className="relative flex flex-col justify-center items-center my-12 w-full h-screen">
@@ -28,12 +34,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ episodeId }) => {
                 <div className="flex flex-col justify-center items-center w-full h-full absolute top-0 left-0">
                     <div className="relative w-[100%] max-w-5xl h-full">
                         <iframe
-                            src={serverUrl}
+                            src={serverUrls[selectedServer]}
                             className="absolute top-0 left-0 w-full h-full"
                             allowFullScreen
                         ></iframe>
                     </div>
-                    <Servers imdbID={episode.seriesID} selectedServer={selectedServer} onSelectServer={setSelectedServer} />
+                    <Servers imdbID={seriesID} selectedServer={selectedServer} onSelectServer={setSelectedServer} />
                 </div>
             ) : (
                 <>

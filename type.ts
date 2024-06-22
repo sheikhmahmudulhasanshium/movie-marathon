@@ -192,3 +192,4 @@ export interface TrailerData {
   status:string;
   error:string;
 }
+export const serverList = ["vidsrc", "moviesapi", "2embed"];

@@ -51,4 +51,4 @@ const Body: React.FC<BodyProps> = ({ imdbID }) => {
     );
 };
 
-export default Body;
+export default Body
