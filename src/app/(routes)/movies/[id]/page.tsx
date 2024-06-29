@@ -10,6 +10,7 @@ import Suggestions from "../../components/Suggestions";
 import Details from '../../components/Details';
 import useMovie from '../../../../../actions/get-movie';
 import SamplePoster from '../../../../../public/images/sample-poster.jpg';
+import { useEffect, useState } from 'react';
 
 const Movie: React.FC = () => {
     const searchParams = useSearchParams();
@@ -17,20 +18,27 @@ const Movie: React.FC = () => {
     const { movie } = useMovie(imdbID);
 
     const title = movie?.Title || "Loading...";
-    const description = movie?.Plot || "Loading...";
+    const description = movie?.Plot || "Description...";
     const imageUrl = movie?.Poster || SamplePoster.src;
-    const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+    
+    const [currentUrl, setCurrentUrl] = useState('');
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setCurrentUrl(window.location.href);
+        }
+    }, []);
 
     return (
         <html suppressHydrationWarning>
             <head>
-                <link rel="icon" href="/images/favicon.ico" className="" />
+                <link rel="icon" href="/images/favicon.ico" />
                 <title>{title}</title>
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:image" content={imageUrl} />
-                <meta property="og:type" content="video.movie" />
-                <meta property="og:url" content={pageUrl} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={currentUrl} />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
