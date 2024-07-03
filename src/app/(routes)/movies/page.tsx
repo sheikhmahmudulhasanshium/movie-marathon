@@ -1,11 +1,20 @@
+"use client"
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import SearchBar from "../components/SearchBar";
 import Header from "../home/components/Header";
 import SideNav from "../home/components/SideNav";
 import Container from "./components/container";
+import Loading from "../components/loading";
 
 const Movies = () => {
-
+    const [isLoaded,setIsLoaded]=useState<boolean>(false)
+    useEffect(()=>{
+        setIsLoaded(true)
+    },[])
+    if(!isLoaded){
+        return <Loading/>
+    }
     return (
         <html>
             <head>

@@ -9,6 +9,8 @@ import Details from "@/app/(routes)/components/Details";
 import VideoPlayer from "./components/video-player";
 import useEpisode from "../../../../../../../actions/get-episode";
 import useShow from "../../../../../../../actions/get-show";
+import { useEffect, useState } from "react";
+import Loading from "@/app/(routes)/components/loading";
 
 const Episode: React.FC = () => {
     const searchParams = useSearchParams();
@@ -23,6 +25,13 @@ const Episode: React.FC = () => {
     const description = episode?.Plot || "Watch this exciting episode.";
     const imageUrl = episode?.Poster || "/default-image.jpg"; // Replace with a default image path
 
+    const [isLoaded,setIsLoaded]=useState<boolean>(false)
+    useEffect(()=>{
+        setIsLoaded(true)
+    },[])
+    if(!isLoaded){
+        return <Loading/>
+    }
     return (
         <html>
             <head>

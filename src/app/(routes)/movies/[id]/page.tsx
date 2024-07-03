@@ -11,6 +11,7 @@ import Details from '../../components/Details';
 import useMovie from '../../../../../actions/get-movie';
 import SamplePoster from '../../../../../public/images/sample-poster.jpg';
 import { useEffect, useState } from 'react';
+import Loading from '../../components/loading';
 
 const Movie: React.FC = () => {
     const searchParams = useSearchParams();
@@ -28,7 +29,13 @@ const Movie: React.FC = () => {
             setCurrentUrl(window.location.href);
         }
     }, []);
-
+    const [isLoaded,setIsLoaded]=useState<boolean>(false)
+    useEffect(()=>{
+        setIsLoaded(true)
+    },[])
+    if(!isLoaded){
+        return <Loading/>
+    }
     return (
         <html suppressHydrationWarning>
             <head>
