@@ -7,7 +7,7 @@ import SideNav from "../home/components/SideNav";
 import Container from "./components/container";
 import Loading from "../components/loading";
 
-const topImdb = () => {
+const TopImdb = () => {
 
     const [isLoaded,setIsLoaded]=useState<boolean>(false)
     useEffect(()=>{
@@ -33,4 +33,4 @@ const topImdb = () => {
     );
 };
 
-export default topImdb;
+export default TopImdb;
