@@ -9,7 +9,7 @@ import Suggestions from "../../components/Suggestions";
 import Details from '../../components/Details';
 import SeasonInfoCard from './components/seasons-and-episodes-info';
 import useShow from '../../../../../actions/get-show';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loading from '../../components/loading';
 
 const Show: React.FC = () => {
@@ -65,7 +65,4 @@ const Show: React.FC = () => {
 };
 
 export default Show;
-function useEffect(arg0: () => void, arg1: never[]) {
-    throw new Error('Function not implemented.');
-}
 
