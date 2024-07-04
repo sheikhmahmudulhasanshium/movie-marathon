@@ -5,7 +5,7 @@ const useSeasonInfo = (imdbID: string | null, selectedSeason: string): { data: S
   const [data, setData] = useState<SeasonData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const apiKey=process.env.NEXT_PUBLIC_OMDB_API_KEY
+  const apiKey=process.env.OMDB_API_KEY
 
   useEffect(() => {
     const fetchSeasonInfo = async () => {
