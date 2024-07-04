@@ -13,7 +13,7 @@ const useSearch = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [selectedIndex, setSelectedIndex] = useState<number>(-1);
     const router = useRouter();
-    const apiKey=process.env.OMDB_API_KEY
+    const apiKey=process.env.NEXT_PUBLIC_OMDB_API_KEY
 
     useEffect(() => {
         if (!searchText.trim()) {

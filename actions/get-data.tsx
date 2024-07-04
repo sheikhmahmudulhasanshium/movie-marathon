@@ -1,7 +1,7 @@
 "use client"
 import { setDefaultValues } from "../data/utils";
 import { Movie } from "../type";
-const apikey=process.env.OMDB_API_KEY
+const apikey=process.env.NEXT_PUBLIC_OMDB_API_KEY
 const fetchMovieOrSeriesDetails = async (title: string): Promise<Movie | null> => {
     
 

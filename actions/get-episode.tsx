@@ -6,7 +6,7 @@ const useEpisode = (imdbID: string | null) => {
     const [episode, setSeries] = useState<IndividualEpisode | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const apikey=process.env.OMDB_API_KEY
+    const apikey=process.env.NEXT_PUBLIC_OMDB_API_KEY
     useEffect(() => {
         if (!imdbID) {
             setLoading(false);
