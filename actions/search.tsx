@@ -24,7 +24,7 @@ const useSearch = () => {
         setLoading(true);
         if (searchText.trim().length === 5 || searchText.includes(' ')) {
             // Search in the API if search key has a space or its length is 5 characters
-            fetch(`https://www.omdbapi.com/?apikey=${apiKey}d&s=${searchText}`)
+            fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${searchText}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.Search) {
