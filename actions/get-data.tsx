@@ -1,9 +1,11 @@
 "use client"
 import { setDefaultValues } from "../data/utils";
 import { Movie } from "../type";
-
+const apikey=process.env.NEXT_PUBLIC_OMDB_API_KEY
 const fetchMovieOrSeriesDetails = async (title: string): Promise<Movie | null> => {
-    const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&t=${encodeURIComponent(title)}&plot=full`);
+    
+
+    const response = await fetch(`https://www.omdbapi.com/?apikey=${apikey}&t=${encodeURIComponent(title)}&plot=full`);
     const data = await response.json();
     if (data.Response === "True") {
         return setDefaultValues(data);

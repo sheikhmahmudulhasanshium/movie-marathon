@@ -6,6 +6,7 @@ const useShow = (imdbID: string | null) => {
     const [series, setSeries] = useState<Movie | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const apiKey=process.env.NEXT_PUBLIC_OMDB_API_KEY
 
     useEffect(() => {
         if (!imdbID) {
@@ -15,7 +16,7 @@ const useShow = (imdbID: string | null) => {
 
         const fetchSeries = async () => {
             try {
-                const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&i=${imdbID}`);
+                const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`);
                 const data: Movie | ErrorResponse = await response.json();
 
                 if ("Error" in data) {

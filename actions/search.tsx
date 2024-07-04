@@ -13,6 +13,7 @@ const useSearch = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [selectedIndex, setSelectedIndex] = useState<number>(-1);
     const router = useRouter();
+    const apiKey=process.env.NEXT_PUBLIC_OMDB_API_KEY
 
     useEffect(() => {
         if (!searchText.trim()) {
@@ -23,7 +24,7 @@ const useSearch = () => {
         setLoading(true);
         if (searchText.trim().length === 5 || searchText.includes(' ')) {
             // Search in the API if search key has a space or its length is 5 characters
-            fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&s=${searchText}`)
+            fetch(`https://www.omdbapi.com/?apikey=${apiKey}d&s=${searchText}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.Search) {
@@ -95,7 +96,7 @@ const useSearch = () => {
             router.push(`/tv-shows/${movie.imdbID}?id=${movie.imdbID}`);
         } else if (movie.Type === "episode") {
             try {
-                const episodeData = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&i=${movie.imdbID}`)
+                const episodeData = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${movie.imdbID}`)
                     .then(response => response.json());
 
                 if (episodeData) {

@@ -5,13 +5,14 @@ const useSeasonInfo = (imdbID: string | null, selectedSeason: string): { data: S
   const [data, setData] = useState<SeasonData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const apiKey=process.env.NEXT_PUBLIC_OMDB_API_KEY
 
   useEffect(() => {
     const fetchSeasonInfo = async () => {
       if (!imdbID) return;
       setLoading(true);
       try {
-        const response = await fetch(`https://www.omdbapi.com/?apikey=fa8c7f7d&i=${imdbID}&type=series&season=${selectedSeason}`);
+        const response = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}&type=series&season=${selectedSeason}`);
         const result: APIResponse = await response.json();
         if (result.Response === "True") {
           setData(result as SeasonData);
