@@ -63,7 +63,9 @@ const Episode: React.FC = () => {
                     <SearchBar />
                     <VideoPlayer episodeId={episodeId} seriesId={seriesId} />
                     <SeasonInfoCard imdbID={seriesId} />
-                    <Details imdbID={episodeId} movieType="episode" />
+                    <div className="flex justify-center items-center w-max sm:w-max md:w-full lg:w-full">
+                           <Details imdbID={episodeId} movieType="episode" />
+                    </div> 
                     <Suggestion imdbID={episodeId} />
                     <Footer />
                 </div>

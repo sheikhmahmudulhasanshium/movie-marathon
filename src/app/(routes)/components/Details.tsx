@@ -8,7 +8,9 @@ import useEpisode from "../../../../actions/get-episode";
 import Link from "next/link";
 import useTrailer from "../../../../actions/get-trailer";
 import useShow from "../../../../actions/get-show";
-import Trailer from './Trailer'; // Import your Trailer component
+import Trailer from './Trailer';
+import { FaImdb } from 'react-icons/fa6';
+import { SiMetacritic, SiRottentomatoes } from 'react-icons/si';
 
 interface DetailsProps {
   imdbID: string | null;
@@ -26,17 +28,16 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
   const error = movieType === "movie" ? movieError : movieType === "series" ? seriesError : episodeError;
   const data = movieType === "movie" ? movie : movieType === "series" ? series : episode;
 
-  // Fetch trailer data only when there's valid data available
   const { trailerData, loading: trailerLoading, error: trailerError } = useTrailer(data);
 
-  const [showTrailer, setShowTrailer] = useState(false); // State to control visibility of the trailer
+  const [showTrailer, setShowTrailer] = useState(false);
 
   const handleOpenTrailer = () => {
-    setShowTrailer(true); // Set state to true to show the trailer
+    setShowTrailer(true);
   }
 
   const handleCloseTrailer = () => {
-    setShowTrailer(false); // Set state to false to hide the trailer
+    setShowTrailer(false);
   }
 
   if (loading) return <div>Loading...</div>;
@@ -49,14 +50,35 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
   const productions = stringToList(data.Production, 'production');
   const directors = stringToList(data.Director, "director");
   const writers = stringToList(data.Writer, "writer");
+  const ratings = data.Ratings;
 
   return (
-    <div className="relative flex gap-4 space-x-2 pl-44 z-10 my-12">
-      <div className="rounded-xl">
-        <Image src={data.Poster !== "N/A" ? data.Poster : SamplePic} alt="poster" height={200} width={200} className="rounded-xl" />
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pl-44 my-12">
+      <div className="md:col-span-1 flex flex-col items-start">
+        <div className="rounded-xl mb-4">
+          <Image src={data.Poster !== "N/A" ? data.Poster : SamplePic} alt="poster" height={300} width={200} className="rounded-xl" />
+        </div>
+        <div className="flex flex-col justify-center items-start gap-2 text-2xl">
+          <p className="flex-bold">Ratings:</p>
+          <div className="flex justify-center items-center">
+            <FaImdb />
+            <p>{ratings[0]?.Value || 'N/A'}</p>
+          </div>
+          {ratings[1] && (
+            <div className="flex justify-center items-center">
+              <SiRottentomatoes />
+              <p>{ratings[1]?.Value || 'N/A'}</p>
+            </div>
+          )}
+          {ratings[2] && (
+            <div className="flex justify-center items-center">
+              <SiMetacritic />
+              <p>{ratings[2]?.Value || 'N/A'}</p>
+            </div>
+          )}
+        </div>
       </div>
-
-      <div className="flex-1 flex flex-col justify-between items-start text-cyan-950 dark:text-white">
+      <div className="md:col-span-2 flex-1 flex flex-col justify-between items-start text-cyan-950 dark:text-white">
         <p className="text-4xl text-cyan-950 dark:text-white font-thin font-sans">{data.Title}</p>
         <div className="flex pt-4 gap-4 items-center">
           {trailerData && (
@@ -76,7 +98,6 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
             <p className="font-bold">Released:</p>
             <p>{data.Released}</p>
           </div>
-
           <div className="flex gap-2">
             <p className="font-bold">Genre:</p>
             {genres}
@@ -123,6 +144,7 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
           </div>
         </div>
       </div>
+      
       {showTrailer && trailerData && <Trailer onClose={handleCloseTrailer} trailerData={trailerData} />}
     </div>
   );
