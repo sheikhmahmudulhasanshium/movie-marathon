@@ -61,7 +61,7 @@ const Profile: React.FC = () => {
                         </div>
                         <div className="flex flex-col justify-start gap-4 text-lg">
                             <p>Also Known As:</p>
-                            {profileData.also_known_as?.map(aka=><p className="text-base">{aka},</p>)}
+                            {profileData.also_known_as?.map((aka,index)=><p key={index} className="text-base">{aka},</p>)}
                         </div>
                     </div>
                 </div>
