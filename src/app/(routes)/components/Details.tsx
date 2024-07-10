@@ -11,6 +11,7 @@ import useShow from "../../../../actions/get-show";
 import Trailer from './Trailer';
 import { FaImdb } from 'react-icons/fa6';
 import { SiMetacritic, SiRottentomatoes } from 'react-icons/si';
+import useTmdbId from '../../../../actions/get-tmdb';
 
 interface DetailsProps {
   imdbID: string | null;
@@ -18,6 +19,8 @@ interface DetailsProps {
 }
 
 const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
+  const tmdbId=useTmdbId(imdbID).tmdbId
+
   const { movie, loading: movieLoading, error: movieError } = useMovie(imdbID);
   const { series, loading: seriesLoading, error: seriesError } = useShow(imdbID);
   const { episode, loading: episodeLoading, error: episodeError } = useEpisode(imdbID);
@@ -43,15 +46,13 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading details: {error}</div>;
   if (!data) return <div>No details available.</div>;
-
-  const genres = stringToList(data.Genre, 'genre');
-  const countries = stringToList(data.Country, 'country');
-  const actors = stringToList(data.Actors, 'actors');
-  const productions = stringToList(data.Production, 'production');
-  const directors = stringToList(data.Director, "director");
-  const writers = stringToList(data.Writer, "writer");
+  const genres = stringToList(data.Genre, 'genre', tmdbId);
+  const countries = stringToList(data.Country, 'country', tmdbId);
+  const actors = stringToList(data.Actors, 'actor', tmdbId);
+  const productions = stringToList(data.Production, 'production', tmdbId);
+  const directors = stringToList(data.Director, "director", tmdbId);
+  const writers = stringToList(data.Writer, "writer", tmdbId);
   const ratings = data.Ratings;
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pl-44 my-12">
       <div className="md:col-span-1 flex flex-col items-start">
