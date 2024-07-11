@@ -47,7 +47,6 @@ const useProfile = (profileName: string | null, tmdbId: string | null) => {
   useEffect(() => {
     const fetchProfile = async () => {
       if (!profileName || !apiKey) {
-        console.log(profileName,apiKey)
         setError("Missing profile name or API Key");
         setLoading(false);
         return;
