@@ -7,7 +7,7 @@ const Actor = () => {
         <div className="flex flex-col justify-between items-center ">
             <Header/>
             <Profile/>
-            <Footer/>
+            <div className="flex w-max sm:w-max md:w-full lg:w-full "><Footer/></div>
         </div>
      );
 }

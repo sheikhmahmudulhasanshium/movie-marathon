@@ -1,27 +1,15 @@
-
 "use client";
 import { useEffect, useState } from "react";
 
 interface KnownFor {
-  name: string;
-  backdrop_path: string | null;
   id: number;
-  title: string;
-  original_title: string;
-  overview: string;
-  poster_path: string | null;
-  media_type: string;
-  adult: boolean;
-  original_language: string;
-  genre_ids: number[];
-  popularity: number;
-  release_date: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
+  title?: string;
+  name?: string;
+  poster_path?: string;
+  media_type?: string;
 }
 
-interface WorkCredits {
+interface Combined_Credit {
   cast: KnownFor[];
   crew: KnownFor[];
 }
@@ -32,10 +20,9 @@ interface Person {
   id: number;
   known_for_department: string;
   name: string;
-  original_name: string;
+  original_name: string; // Include original_name in Person interface
   popularity: number;
   profile_path: string | null;
-  known_for: KnownFor[];
   also_known_as?: string[];
   biography?: string;
   birthday?: string;
@@ -43,7 +30,8 @@ interface Person {
   homepage?: string | null;
   imdb_id?: string;
   place_of_birth?: string;
-  work_credits?: WorkCredits;
+  known_for?: KnownFor[];
+  combined_credits?: Combined_Credit;
 }
 
 interface ErrorResponse {
@@ -57,77 +45,60 @@ const useProfile = (profileName: string | null, tmdbId: string | null) => {
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
   useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        let url = `https://api.themoviedb.org/3/person/${tmdbId}?api_key=${apiKey}&append_to_response=combined_credits`;
-        if (profileName) {
-          const formattedName = profileName.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('%20');
-          url = `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${encodeURIComponent(formattedName)}`;
-        }
-
-        const response = await fetch(url);
-        if (!response.ok) {
-          const errorResponse: ErrorResponse = await response.json();
-          throw new Error(`Failed to fetch profile data: ${errorResponse.status_message}`);
-        }
-
-        const data = await response.json();
-        if (profileName) {
-          // Handle search results for a specific person
-          const person = data.results.find((result: any) => result.known_for_department === 'Acting');
-          if (person) {
-            const personId = person.id;
-            const personResponse = await fetch(`https://api.themoviedb.org/3/person/${personId}?api_key=${apiKey}&append_to_response=combined_credits`);
-            if (!personResponse.ok) {
-              const personErrorResponse: ErrorResponse = await personResponse.json();
-              throw new Error(`Failed to fetch profile data for person: ${personErrorResponse.status_message}`);
-            }
-            const personData = await personResponse.json();
-            const cast = personData.combined_credits?.cast || [];
-            const crew = personData.combined_credits?.crew || [];
-
-            setProfileData({
-              ...personData,
-              work_credits: {
-                cast: cast.filter((work: any) => work.poster_path),
-                crew: crew.filter((work: any) => work.poster_path),
-              },
-            });
-          } else {
-            throw new Error('Person not found');
-          }
-        } else {
-          // Handle direct person ID lookup
-          const cast = data.combined_credits?.cast || [];
-          const crew = data.combined_credits?.crew || [];
-
-          setProfileData({
-            ...data,
-            work_credits: {
-              cast: cast.filter((work: any) => work.poster_path),
-              crew: crew.filter((work: any) => work.poster_path),
-            },
-          });
-        }
+    const fetchProfile = async () => {
+      if (!profileName || !apiKey) {
+        setError("Missing profile name or API Key");
         setLoading(false);
-      } catch (error: any) {
-        setError(error.message);
+        return;
+      }
+
+      try {
+        const searchResponse = await fetch(`https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${profileName}`);
+        const searchData = await searchResponse.json();
+
+        if (!searchResponse.ok || searchData.results.length === 0) {
+          throw new Error("Profile not found");
+        }
+
+        const profileId = searchData.results[0].id;
+        const knownFor = searchData.results[0].known_for;
+
+        // Fetching detailed person info including original_name
+        const personResponse = await fetch(`https://api.themoviedb.org/3/person/${profileId}?api_key=${apiKey}`);
+        const personData = await personResponse.json();
+
+        if (!personResponse.ok) {
+          throw new Error("Failed to fetch person details");
+        }
+
+        // Fetching combined credits
+        const creditsResponse = await fetch(`https://api.themoviedb.org/3/person/${profileId}/combined_credits?api_key=${apiKey}`);
+        const creditsData = await creditsResponse.json();
+
+        if (!creditsResponse.ok) {
+          throw new Error("Failed to fetch combined credits");
+        }
+
+        // Constructing the final profile data object
+        const profileData: Person = {
+          ...personData,
+          original_name: personData.name, // Assume original_name is the same as name initially
+          combined_credits: creditsData,
+          known_for: knownFor,
+        };
+
+        setProfileData(profileData);
+      } catch (err: any) { // Explicitly type 'err' as any or specify a more specific type if possible
+        setError(err.message || 'An unknown error occurred');
+      } finally {
         setLoading(false);
       }
     };
 
-    if (tmdbId || profileName) {
-      fetchProfileData();
-    } else {
-      setLoading(false);
-    }
-  }, [tmdbId, profileName, apiKey]);
+    fetchProfile();
+  }, [profileName, apiKey]);
 
   return { profileData, loading, error };
 };
 
 export default useProfile;
-
