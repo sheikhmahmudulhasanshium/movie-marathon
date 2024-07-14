@@ -23,7 +23,7 @@ const Container: FC = () => {
                 </div>
             </div>
             <div className="flex flex-col justify-between">
-                <h2 className="text-4xl font-thin font-serif text-cyan-950 py-12 dark:text-white flex items-start">Top Movies</h2>
+                <h2 className="text-4xl font-thin font-serif text-cyan-950 py-12 dark:text-white flex items-start">Top Shows</h2>
                 <div className="grid grid-cols-3 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-4">
                     {series.map((series, index) => (
                         <Card key={index} movie={series} />
