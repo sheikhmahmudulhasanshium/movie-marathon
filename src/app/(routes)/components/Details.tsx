@@ -15,11 +15,11 @@ import useTmdbId from '../../../../actions/get-tmdb';
 
 interface DetailsProps {
   imdbID: string | null;
-  movieType: string;
+  movieType: 'movie' | 'series' | 'episode';
 }
 
 const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
-  const tmdbId=useTmdbId(imdbID).tmdbId
+  const tmdbId = useTmdbId(imdbID).tmdbId;
 
   const { movie, loading: movieLoading, error: movieError } = useMovie(imdbID);
   const { series, loading: seriesLoading, error: seriesError } = useShow(imdbID);
@@ -37,22 +37,24 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
 
   const handleOpenTrailer = () => {
     setShowTrailer(true);
-  }
+  };
 
   const handleCloseTrailer = () => {
     setShowTrailer(false);
-  }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading details: {error}</div>;
   if (!data) return <div>No details available.</div>;
-  const genres = stringToList(data.Genre, 'genre', tmdbId);
-  const countries = stringToList(data.Country, 'country', tmdbId);
-  const actors = stringToList(data.Actors, 'actor', tmdbId);
-  const productions = stringToList(data.Production, 'production', tmdbId);
-  const directors = stringToList(data.Director, "director", tmdbId);
-  const writers = stringToList(data.Writer, "writer", tmdbId);
+
+  const genres = stringToList({ list: data.Genre, listName: 'genre' });
+  const countries = stringToList({ list: data.Country, listName: 'country' });
+  const actors = stringToList({ list: data.Actors, listName: 'actor', tmdbId });
+  const productions = stringToList({ list: data.Production, listName: 'production' });
+  const directors = stringToList({ list: data.Director, listName: 'director', tmdbId });
+  const writers = stringToList({ list: data.Writer, listName: 'writer', tmdbId });
   const ratings = data.Ratings;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pl-44 my-12">
       <div className="md:col-span-1 flex flex-col items-start">
@@ -83,7 +85,8 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
         <p className="text-4xl text-cyan-950 dark:text-white font-thin font-sans">{data.Title}</p>
         <div className="flex pt-4 gap-4 items-center">
           {trailerData && (
-            <button className="bg-white text-black flex rounded-lg justify-center items-center p-1 gap-x-2 text-lg font-thin"
+            <button
+              className="bg-white text-black flex rounded-lg justify-center items-center p-1 gap-x-2 text-lg font-thin"
               onClick={handleOpenTrailer}
             >
               <p>Trailer</p>
@@ -103,26 +106,29 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
             <p className="font-bold">Genre:</p>
             {genres}
           </div>
-          {episode?.Type === "episode" &&
+          {episode?.Type === "episode" && (
             <div className="flex">
-              <Link className="flex gap-2" href={{ pathname: `/tv-shows/${episode.seriesID}`, query: { id: episode.seriesID } }}>
+              <Link
+                className="flex gap-2"
+                href={{ pathname: `/tv-shows/${episode.seriesID}`, query: { id: episode.seriesID } }}
+              >
                 <p className="font-bold">Series Name:</p>
                 <p className="hover:underline">{seriesNameFromEpisode}</p>
               </Link>
             </div>
-          }
-          {episode?.Type === "episode" &&
+          )}
+          {episode?.Type === "episode" && (
             <div className="flex gap-2">
               <p className="font-bold">Season:</p>
               {episode.Season}
             </div>
-          }
-          {episode?.Type === "episode" &&
+          )}
+          {episode?.Type === "episode" && (
             <div className="flex gap-2">
               <p className="font-bold">Episode:</p>
               {episode.Episode}
             </div>
-          }
+          )}
           <div className="flex gap-2">
             <p className="font-bold">Casts:</p>
             {actors}
@@ -145,7 +151,6 @@ const Details: React.FC<DetailsProps> = ({ imdbID, movieType }) => {
           </div>
         </div>
       </div>
-      
       {showTrailer && trailerData && <Trailer onClose={handleCloseTrailer} trailerData={trailerData} />}
     </div>
   );

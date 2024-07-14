@@ -1,37 +1,49 @@
 import React from "react";
 import Link from "next/link";
 
-const stringToList = (list: string, listName: string, tmdbId: string|null): JSX.Element => {
-    if (!list || list === "N/A") {
-        return <p>N/A</p>;
+interface StringToListProps {
+  list: string;
+  listName: string;
+  tmdbId?: string | null;
+}
+
+const stringToList: React.FC<StringToListProps> = ({ list, listName, tmdbId }) => {
+  if (!list || list === "N/A") {
+    return <p>N/A</p>;
+  }
+
+  const updatedList = list.split(", ");
+  const links = updatedList.map((item: string, index: number) => {
+    const urlFriendlyItem = item.toLowerCase().replace(/ /g, "-");
+    const query = { [listName.toLowerCase()]: item };
+
+    if (tmdbId) {
+      query.tmdbId = tmdbId;
     }
 
-    const updatedList = list.split(", ");
-    const links = updatedList.map((item, index) => {
-        // Convert spaces to hyphens for the URL path
-        const urlFriendlyItem = item.toLowerCase().replace(/ /g, "-");
+    return (
+      <Link
+        href={{
+          pathname: `/${listName.toLowerCase()}/${urlFriendlyItem}`,
+          query,
+        }}
+        key={index}
+      >
+        <span className="hover:underline">{item}</span>
+      </Link>
+    );
+  });
 
-        return (
-            <Link
-                href={{
-                    pathname: `/${listName.toLowerCase()}/${urlFriendlyItem}`,
-                    query: { [listName.toLowerCase()]: `${urlFriendlyItem}`,tmdbId }
-                }}
-                key={index}
-            >
-                <span className="hover:underline">{item}</span>
-            </Link>
-        );
-    });
-
-    const concatenatedLinks = links.map((link, index) => (
+  return (
+    <p>
+      {links.map((link, index) => (
         <React.Fragment key={index}>
-            {link}
-            {index < links.length - 1 && <span>, </span>}
+          {link}
+          {index < links.length - 1 && <span>, </span>}
         </React.Fragment>
-    ));
-
-    return <p>{concatenatedLinks}</p>;
+      ))}
+    </p>
+  );
 };
 
 export default stringToList;
