@@ -1,19 +1,19 @@
 ### Movie Marathon
 <details>
   <summary>The Snippets of the app is given here</summary>
-  <img src="page-1" alt="Home Page"/>
-  <img src="page-2" alt="Movie Page"/>
-  <img src="page-8" alt="Tv Shows Page"/>
-  <img src="page-9" alt="Top Shows"/>
-  <img src="page-10" alt="Top Movies"/>
-  <img src="page-3" alt="Specific Movie Details"/>
-  <img src="page-4" alt="Video Player"/>
-  <img src="page-5" alt="Actor Profile"/>
-  <img src="page-6" alt="Director Profile"/>
-  <img src="page-11" alt="Specific Genre"/>
-    <img src="page-12" alt="Specific Country"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-1.png" alt="Home Page"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-2.png" alt="Movie Page"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-8.png" alt="Tv Shows Page"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-9.png" alt="Top Shows"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-10.png" alt="Top Movies"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-3.png" alt="Specific Movie Details"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-4.png" alt="Video Player"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-5.png" alt="Actor Profile"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-6.png" alt="Director Profile"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-11.png" alt="Specific Genre"/>
+    <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-12.png" alt="Specific Country"/>
 
-  <img src="page-7" alt="Footer"/>
+  <img src="https://github.com/sheikhmahmudulhasanshium/movie-marathon/blob/main/snippets/p-7.png" alt="Footer"/>
 
 </details>
 
