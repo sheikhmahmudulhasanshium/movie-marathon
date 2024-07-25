@@ -17,3 +17,20 @@ html {
 html.dark {
   @apply bg-gray-900 text-white;
 }
+::-webkit-scrollbar-thumb{
+  background-image: linear-gradient(to right bottom, #00ffff, #96aaec);
+}
+::-webkit-scrollbar{
+  width:10px;
+  height:0px;  
+}
+
+.vertical-timeline::before {
+  /* this is the vertical line */
+  background: #FFFFFF ;
+  
+}
+
+.empty {
+  height: 700px;
+}

@@ -1,7 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
 interface KnownFor {
+  job: string;
+  release_date: string;
+  character: string;
   id: number;
   title?: string;
   name?: string;

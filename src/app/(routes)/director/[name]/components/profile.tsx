@@ -1,18 +1,22 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import useProfile from "../../../../../../actions/get-profile";
 import { format, parseISO } from "date-fns";
 import React from 'react';
 import { GiWorld } from "react-icons/gi";
+import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
+import 'react-vertical-timeline-component/style.min.css';
+import Loading from "@/app/(routes)/components/loading";
 
 const Profile: React.FC = () => {
     const searchParams = useSearchParams();
     const profileName = searchParams.get("director");
     const tmdbId = searchParams.get('tmdbId');
     const { profileData, loading, error } = useProfile(profileName, tmdbId);
+    const router = useRouter();
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
 
     if (error || !profileData) {
@@ -39,6 +43,11 @@ const Profile: React.FC = () => {
         const birthDate = parseISO(birthday);
         const age = Math.floor((new Date().getTime() - birthDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
         return `${format(birthDate, 'd MMMM yyyy')} (${age} years old)`;
+    };
+
+    const handleRedirect = (media_type: string|undefined, id: number) => {
+        const mediaType=media_type==='movie'?'movies':'tv-shows'
+        router.push(`/${mediaType}/${id}`);
     };
 
     return (
@@ -93,7 +102,7 @@ const Profile: React.FC = () => {
                     {formattedData.known_for && formattedData.known_for.length > 0 && (
                         <>
                             <p className="text-2xl pt-4">Known For</p>
-                            <div className="gap-4 bg-black grid grid-cols-4 justify-center items-center">
+                            <div className="gap-4  grid grid-cols-4 justify-center items-center">
                                 {formattedData.known_for.map((work, index) => (
                                     <div key={index}>
                                         <img
@@ -101,25 +110,70 @@ const Profile: React.FC = () => {
                                             src={`https://media.themoviedb.org/t/p/w185${work.poster_path}`}
                                             alt={work.title || work.name}
                                         />
-                                        <p>{work.title || work.name}</p>
+                                        <p className="">{work.title || work.name}</p>
                                     </div>
                                 ))}
                             </div>
                         </>
                     )}
+
                     {formattedData.combined_credits?.cast && formattedData.combined_credits.cast.length > 0 && (
                         <>
-                            <p className="text-2xl pt-4">Directing</p>
-                            <div className="gap-4 bg-black grid grid-cols-4 justify-center items-center">
-                                {formattedData.combined_credits.cast.slice(0, 8).map((work, index) => (
-                                    <div key={index}>
+                            <p className="text-2xl py-4">Acting</p>
+                            <div className="gap-4 empty overflow-y-scroll flex ">
+                                <VerticalTimeline animate={true}  layout="1-column-left" className=" text-3xl ">
+
+                                    {formattedData.combined_credits.cast.map((work, index) => (
+                                        work.media_type && work.id && (
+                                            <VerticalTimelineElement className="vertical-timeline-element--work "
+                                                visible={true}
+                                                position={"right"}
+                                                key={index} 
+                                                contentStyle={{ background: '#fff', color: '#000' }}
+                                                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                                                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#0ff' }}
+                                                date={work.release_date ? format(parseISO(work.release_date), "d MMMM yyyy") : ' '}
+                                                icon={
+                                                    <img
+                                                        className="rounded-full w-10 h-10"
+                                                        src={`https://media.themoviedb.org/t/p/w185${work.poster_path}`}
+                                                        alt={work.title || work.name}
+                                                    />
+                                                }
+                                                onTimelineElementClick={() => handleRedirect(work.media_type, work.id)}
+                                            >
+
+                                                <div className="flex space-x-4 px-2  my-2 rounded-lg">
+                                                    <div >
+                                                    <p className="vertical-timeline-element-title">{work.title || work.name}</p> 
+                                                    <p className="vertical-timeline-element-title">({work.media_type})</p>
+                                                    </div>
+                                                    
+                                                    
+                                                    {work.character && <p className="vertical-timeline-element-title text-slate-500">As {work.character}</p>}
+                                                </div>
+                                            </VerticalTimelineElement>
+                                        )
+                                    ))}
+                                </VerticalTimeline>
+
+                            </div>
+                            <div>
+                                <p className="text-2xl py-4">Directing</p>
+
+                                {formattedData.combined_credits.crew.map((work) =>(
+                                    work.media_type && work.id && ((work.job!="actor") && (work.job="director")) &&(
+                                    <div key={work.id} className="flex">
+                                        <p>{work.name}</p>
+                                        <p>{work.character}</p>
+                                        <p>{work.job}</p>
+
                                         <img
-                                            className="rounded-lg shadow-md w-24"
-                                            src={`https://media.themoviedb.org/t/p/w185${work.poster_path}`}
-                                            alt={work.title || work.name}
-                                        />
-                                        <p>{work.title || work.name}</p>
-                                    </div>
+                                                        className="rounded-full w-10 h-10"
+                                                        src={`https://media.themoviedb.org/t/p/w185${work.poster_path}`}
+                                                        alt={work.title || work.name}
+                                                    />
+                                    </div>)
                                 ))}
                             </div>
                         </>
